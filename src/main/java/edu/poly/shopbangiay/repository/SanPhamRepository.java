@@ -23,6 +23,12 @@ public class SanPhamRepository {
             return (SanPham) query.getSingleResult();
     }
 
+    public List<SanPham> timKiem(String ma){
+        Query query = session.createQuery("from SanPham where ma like: ma");
+        query.setParameter("ma", "%" + ma + "%");
+        return query.getResultList();
+    }
+
     public Boolean them(SanPham sanPham){
         try {
             transaction = session.beginTransaction();

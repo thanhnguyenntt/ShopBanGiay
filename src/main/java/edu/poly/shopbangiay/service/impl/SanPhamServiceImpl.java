@@ -20,6 +20,11 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
+    public List<SanPham> timKiem(String ma) {
+        return sanPhamRepository.timKiem(ma);
+    }
+
+    @Override
     public Boolean them(SanPham sanPham) {
         return sanPhamRepository.them(sanPham);
     }
