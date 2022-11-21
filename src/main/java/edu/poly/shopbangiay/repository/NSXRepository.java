@@ -23,6 +23,16 @@ public class NSXRepository {
         return query.getResultList();
     }
 
+    public NSX getNSXByMa(String ma){
+        try {
+            Query query = session.createQuery("from NSX where ma =: ma");
+            query.setParameter("ma", ma);
+            return (NSX) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     public Boolean them(NSX nsx){
         try{
             transaction = session.beginTransaction();

@@ -8,6 +8,7 @@ import edu.poly.shopbangiay.model.*;
 import edu.poly.shopbangiay.service.*;
 import edu.poly.shopbangiay.service.impl.*;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class QLCT extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setTitle("Quản lý chi tiết");
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         loadDataNSX(nsxService.getList());
         loadDataLoai(loaiService.getList());
@@ -114,6 +116,46 @@ public class QLCT extends javax.swing.JDialog {
         }
     }
 
+    public String genNSX(){
+        for (int i = 0; i < nsxService.getList().size() + 1; i++) {
+            String ma = "NSX" + i;
+            if (nsxService.getNSXByMa(ma) == null) {
+                return ma;
+            }
+        }
+        return null;
+    }
+
+    public String genLoai(){
+        for (int i = 0; i < loaiService.getList().size() + 1; i++) {
+            String ma = "L" + i;
+            if (loaiService.getLoaiByMa(ma) == null) {
+                return ma;
+            }
+        }
+        return null;
+    }
+
+    public String genCL(){
+        for (int i = 0; i < chatLieuService.getList().size() + 1; i++) {
+            String ma = "CL" + i;
+            if (chatLieuService.getCLByMa(ma) == null) {
+                return ma;
+            }
+        }
+        return null;
+    }
+    public String genMS(){
+        for (int i = 0; i < mauSacService.getList().size() + 1; i++) {
+            String ma = "MS" + i;
+            if (mauSacService.getMSByMa(ma) == null) {
+                return ma;
+            }
+        }
+        return null;
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,6 +165,7 @@ public class QLCT extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel10 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         txtMaNSX = new textfield.TextField();
@@ -139,7 +182,7 @@ public class QLCT extends javax.swing.JDialog {
         txtTenLoai = new textfield.TextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblLoai = new dynamic_subjtable.TableCustom();
-        btnLoai = new edu.poly.shopbangiay.raven.button.Button();
+        btnThemLoai = new edu.poly.shopbangiay.raven.button.Button();
         btnSuaLoai = new edu.poly.shopbangiay.raven.button.Button();
         btnXoaLoai = new edu.poly.shopbangiay.raven.button.Button();
         txtTimLoai = new textfield.TextField();
@@ -165,16 +208,25 @@ public class QLCT extends javax.swing.JDialog {
         txtTimMS = new textfield.TextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        txtMaSize = new textfield.TextField();
-        txtTenSize = new textfield.TextField();
+        txtSoSize = new textfield.TextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblSize = new dynamic_subjtable.TableCustom();
         btnThemSIze = new edu.poly.shopbangiay.raven.button.Button();
         btnSuaSize = new edu.poly.shopbangiay.raven.button.Button();
         btnXoaSize = new edu.poly.shopbangiay.raven.button.Button();
         txtTimSize = new textfield.TextField();
+        btnClose = new edu.poly.shopbangiay.raven.button.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 255), 1, true));
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         txtMaNSX.setLabelText("Mã");
 
@@ -259,11 +311,15 @@ public class QLCT extends javax.swing.JDialog {
                     .addComponent(txtTimNSX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaNSX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nhà sản xuất", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
         txtMaLoai.setLabelText("Mã");
 
@@ -284,10 +340,10 @@ public class QLCT extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblLoai);
 
-        btnLoai.setText("Thêm");
-        btnLoai.addActionListener(new java.awt.event.ActionListener() {
+        btnThemLoai.setText("Thêm");
+        btnThemLoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoaiActionPerformed(evt);
+                btnThemLoaiActionPerformed(evt);
             }
         });
 
@@ -328,7 +384,7 @@ public class QLCT extends javax.swing.JDialog {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSuaLoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLoai, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                            .addComponent(btnThemLoai, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                             .addComponent(btnXoaLoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -338,7 +394,7 @@ public class QLCT extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMaLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnThemLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTenLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -356,7 +412,7 @@ public class QLCT extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -365,7 +421,7 @@ public class QLCT extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -374,6 +430,10 @@ public class QLCT extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Loại", jPanel2);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         txtMaCL.setLabelText("Mã");
 
@@ -466,7 +526,7 @@ public class QLCT extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -475,7 +535,7 @@ public class QLCT extends javax.swing.JDialog {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -484,6 +544,10 @@ public class QLCT extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Chất liệu", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         txtMaMS.setLabelText("Mã");
 
@@ -568,15 +632,14 @@ public class QLCT extends javax.swing.JDialog {
                     .addComponent(txtTimMS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaMS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -585,7 +648,7 @@ public class QLCT extends javax.swing.JDialog {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -595,9 +658,11 @@ public class QLCT extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Màu sắc", jPanel4);
 
-        txtMaSize.setLabelText("Mã");
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtTenSize.setLabelText("Số size");
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtSoSize.setLabelText("Số size");
 
         tblSize.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -652,8 +717,7 @@ public class QLCT extends javax.swing.JDialog {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMaSize, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenSize, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSoSize, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTimSize, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -666,19 +730,17 @@ public class QLCT extends javax.swing.JDialog {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemSIze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTenSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSuaSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnThemSIze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSoSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(btnSuaSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTimSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -686,7 +748,7 @@ public class QLCT extends javax.swing.JDialog {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -695,7 +757,7 @@ public class QLCT extends javax.swing.JDialog {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -705,15 +767,43 @@ public class QLCT extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Size", jPanel5);
 
+        btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -721,103 +811,277 @@ public class QLCT extends javax.swing.JDialog {
 
     private void btnThemNSXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNSXActionPerformed
         // TODO add your handling code here:
+        NSX nsx = new NSX();
+        nsx.setMa(genNSX());
+        nsx.setTen(txtTenNSX.getText());
+        if (nsxService.them(nsx)){
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            loadDataNSX(nsxService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
     }//GEN-LAST:event_btnThemNSXActionPerformed
-  
+
     private void btnSuaNSXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNSXActionPerformed
         // TODO add your handling code here:
+        int row = tblNSX.getSelectedRow();
+        NSX nsx = nsxService.getList().get(row);
+        nsx.setMa(txtMaNSX.getText());
+        nsx.setTen(txtTenNSX.getText());
+        if (nsxService.sua(nsx)){
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            loadDataNSX(nsxService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+        }
     }//GEN-LAST:event_btnSuaNSXActionPerformed
 
     private void btnXoaNSXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNSXActionPerformed
         // TODO add your handling code here:
+        int row = tblNSX.getSelectedRow();
+        NSX nsx = nsxService.getList().get(row);
+
+        if (nsxService.xoa(nsx)){
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadDataNSX(nsxService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
     }//GEN-LAST:event_btnXoaNSXActionPerformed
 
     private void txtTimNSXCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimNSXCaretUpdate
         // TODO add your handling code here:
+        String tim = txtTimNSX.getText();
+        List<NSX> list = nsxService.timKiem(tim);
+        loadDataNSX(list);
     }//GEN-LAST:event_txtTimNSXCaretUpdate
 
     private void tblNSXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNSXMouseClicked
         // TODO add your handling code here:
+        int row = tblNSX.getSelectedRow();
+        txtMaNSX.setText(tblNSX.getValueAt(row, 1).toString());
+        txtTenNSX.setText(tblNSX.getValueAt(row, 2).toString());
     }//GEN-LAST:event_tblNSXMouseClicked
 
-    private void btnLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoaiActionPerformed
+    private void btnThemLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnLoaiActionPerformed
+        Loai loai = new Loai();
+        loai.setMa(genLoai());
+        loai.setTen(txtTenLoai.getText());
+        if (loaiService.them(loai)){
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            loadDataLoai(loaiService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+    }//GEN-LAST:event_btnThemLoaiActionPerformed
 
     private void btnSuaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaLoaiActionPerformed
         // TODO add your handling code here:
+
+        int row = tblLoai.getSelectedRow();
+        Loai loai = loaiService.getList().get(row);
+        loai.setMa(txtMaLoai.getText());
+        loai.setTen(txtTenLoai.getText());
+        if (loaiService.sua(loai)){
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            loadDataLoai(loaiService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+        }
     }//GEN-LAST:event_btnSuaLoaiActionPerformed
 
     private void btnXoaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaLoaiActionPerformed
         // TODO add your handling code here:
+        int row = tblLoai.getSelectedRow();
+        Loai loai = loaiService.getList().get(row);
+        if (loaiService.xoa(loai)){
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadDataLoai(loaiService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
     }//GEN-LAST:event_btnXoaLoaiActionPerformed
 
     private void txtTimLoaiCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimLoaiCaretUpdate
         // TODO add your handling code here:
+        String tim = txtTimLoai.getText();
+        List<Loai> list = loaiService.timKiem(tim);
+        loadDataLoai(list);
+
     }//GEN-LAST:event_txtTimLoaiCaretUpdate
 
     private void tblLoaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLoaiMouseClicked
         // TODO add your handling code here:
+        int row = tblLoai.getSelectedRow();
+        txtMaLoai.setText(tblLoai.getValueAt(row, 1).toString());
+        txtTenLoai.setText(tblLoai.getValueAt(row, 2).toString());
+
     }//GEN-LAST:event_tblLoaiMouseClicked
 
     private void btnThemCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCLActionPerformed
         // TODO add your handling code here:
+        ChatLieu chatLieu = new ChatLieu();
+        chatLieu.setMa(genCL());
+        chatLieu.setTen(txtTenCL.getText());
+        if (chatLieuService.them(chatLieu)){
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            loadDataCL(chatLieuService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
     }//GEN-LAST:event_btnThemCLActionPerformed
 
     private void btnSuaCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaCLActionPerformed
         // TODO add your handling code here:
+        int row = tblCL.getSelectedRow();
+        ChatLieu chatLieu = chatLieuService.getList().get(row);
+        chatLieu.setMa(txtMaCL.getText());
+        chatLieu.setTen(txtTenCL.getText());
+        if (chatLieuService.sua(chatLieu)){
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            loadDataCL(chatLieuService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+        }
     }//GEN-LAST:event_btnSuaCLActionPerformed
 
     private void btnXoaCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCLActionPerformed
         // TODO add your handling code here:
+        int row = tblCL.getSelectedRow();
+        ChatLieu chatLieu = chatLieuService.getList().get(row);
+        if (chatLieuService.xoa(chatLieu)){
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadDataCL(chatLieuService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
     }//GEN-LAST:event_btnXoaCLActionPerformed
 
     private void txtTimCLCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimCLCaretUpdate
         // TODO add your handling code here:
+        String tim = txtTimCL.getText();
+        List<ChatLieu> list = chatLieuService.timKiem(tim);
+        loadDataCL(list);
     }//GEN-LAST:event_txtTimCLCaretUpdate
 
     private void tblCLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCLMouseClicked
         // TODO add your handling code here:
+        int row = tblCL.getSelectedRow();
+        txtMaCL.setText(tblCL.getValueAt(row, 1).toString());
+        txtTenCL.setText(tblCL.getValueAt(row, 2).toString());
     }//GEN-LAST:event_tblCLMouseClicked
 
     private void btnThemMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMSActionPerformed
         // TODO add your handling code here:
+        MauSac mauSac = new MauSac();
+        mauSac.setMa(genMS());
+        mauSac.setTen(txtTenMS.getText());
+        if (mauSacService.them(mauSac)){
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            loadDataMS(mauSacService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
     }//GEN-LAST:event_btnThemMSActionPerformed
 
     private void btnSuaMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaMSActionPerformed
         // TODO add your handling code here:
+        int row = tblMS.getSelectedRow();
+        MauSac mauSac = mauSacService.getList().get(row);
+        mauSac.setMa(txtMaMS.getText());
+        mauSac.setTen(txtTenMS.getText());
+        if (mauSacService.sua(mauSac)){
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            loadDataMS(mauSacService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+        }
     }//GEN-LAST:event_btnSuaMSActionPerformed
 
     private void btnXoaMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaMSActionPerformed
         // TODO add your handling code here:
+        int row = tblMS.getSelectedRow();
+        MauSac mauSac = mauSacService.getList().get(row);
+
+        if (mauSacService.xoa(mauSac)){
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadDataMS(mauSacService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
     }//GEN-LAST:event_btnXoaMSActionPerformed
 
     private void txtTimMSCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimMSCaretUpdate
         // TODO add your handling code here:
+        String tim = txtTimMS.getText();
+        List<MauSac> list = mauSacService.timKiem(tim);
+        loadDataMS(list);
     }//GEN-LAST:event_txtTimMSCaretUpdate
 
     private void tblMSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMSMouseClicked
         // TODO add your handling code here:
+        int row = tblMS.getSelectedRow();
+        txtMaMS.setText(tblMS.getValueAt(row, 1).toString());
+        txtTenMS.setText(tblMS.getValueAt(row, 2).toString());
     }//GEN-LAST:event_tblMSMouseClicked
 
     private void btnThemSIzeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSIzeActionPerformed
         // TODO add your handling code here:
+        Size size = new Size();
+        size.setSoSize(Integer.parseInt(txtSoSize.getText()));
+        if (sizeService.them(size)){
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            loadDataSize(sizeService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
     }//GEN-LAST:event_btnThemSIzeActionPerformed
 
     private void btnSuaSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaSizeActionPerformed
         // TODO add your handling code here:
+        int row = tblSize.getSelectedRow();
+        Size size = sizeService.getList().get(row);
+        size.setSoSize(Integer.parseInt(txtSoSize.getText()));
+        if (sizeService.sua(size)){
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            loadDataSize(sizeService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+        }
     }//GEN-LAST:event_btnSuaSizeActionPerformed
 
     private void btnXoaSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSizeActionPerformed
         // TODO add your handling code here:
+        int row = tblSize.getSelectedRow();
+        Size size = sizeService.getList().get(row);
+        if (sizeService.xoa(size)){
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadDataSize(sizeService.getList());
+        }else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
+
     }//GEN-LAST:event_btnXoaSizeActionPerformed
 
     private void txtTimSizeCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimSizeCaretUpdate
         // TODO add your handling code here:
+        Integer tim = Integer.parseInt(txtTimSize.getText());
+        List<Size> list = sizeService.timKiem(tim);
+        loadDataSize(list);
+
     }//GEN-LAST:event_txtTimSizeCaretUpdate
 
     private void tblSizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSizeMouseClicked
         // TODO add your handling code here:
+        int row = tblSize.getSelectedRow();
+        txtSoSize.setText(tblSize.getValueAt(row, 1).toString());
     }//GEN-LAST:event_tblSizeMouseClicked
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -830,7 +1094,7 @@ public class QLCT extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("FlatLaf Light".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -862,13 +1126,14 @@ public class QLCT extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private edu.poly.shopbangiay.raven.button.Button btnLoai;
+    private edu.poly.shopbangiay.raven.button.Button btnClose;
     private edu.poly.shopbangiay.raven.button.Button btnSuaCL;
     private edu.poly.shopbangiay.raven.button.Button btnSuaLoai;
     private edu.poly.shopbangiay.raven.button.Button btnSuaMS;
     private edu.poly.shopbangiay.raven.button.Button btnSuaNSX;
     private edu.poly.shopbangiay.raven.button.Button btnSuaSize;
     private edu.poly.shopbangiay.raven.button.Button btnThemCL;
+    private edu.poly.shopbangiay.raven.button.Button btnThemLoai;
     private edu.poly.shopbangiay.raven.button.Button btnThemMS;
     private edu.poly.shopbangiay.raven.button.Button btnThemNSX;
     private edu.poly.shopbangiay.raven.button.Button btnThemSIze;
@@ -878,6 +1143,7 @@ public class QLCT extends javax.swing.JDialog {
     private edu.poly.shopbangiay.raven.button.Button btnXoaNSX;
     private edu.poly.shopbangiay.raven.button.Button btnXoaSize;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -901,12 +1167,11 @@ public class QLCT extends javax.swing.JDialog {
     private textfield.TextField txtMaLoai;
     private textfield.TextField txtMaMS;
     private textfield.TextField txtMaNSX;
-    private textfield.TextField txtMaSize;
+    private textfield.TextField txtSoSize;
     private textfield.TextField txtTenCL;
     private textfield.TextField txtTenLoai;
     private textfield.TextField txtTenMS;
     private textfield.TextField txtTenNSX;
-    private textfield.TextField txtTenSize;
     private textfield.TextField txtTimCL;
     private textfield.TextField txtTimLoai;
     private textfield.TextField txtTimMS;

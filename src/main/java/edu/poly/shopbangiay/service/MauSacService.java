@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MauSacService {
     List<MauSac> getList();
-    MauSac getOne(String ma);
+    MauSac getMSByMa(String ma);
     List<MauSac> timKiem(String ten);
     Boolean them(MauSac mauSac);
     Boolean sua(MauSac mauSac);

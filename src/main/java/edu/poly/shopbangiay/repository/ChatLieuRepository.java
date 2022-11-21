@@ -2,6 +2,7 @@ package edu.poly.shopbangiay.repository;
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
 import edu.poly.shopbangiay.model.ChatLieu;
+import edu.poly.shopbangiay.model.Loai;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,6 +22,16 @@ public class ChatLieuRepository {
         Query query = session.createQuery("from ChatLieu where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
+    }
+
+    public ChatLieu getCLByMa(String ma){
+        try {
+            Query query = session.createQuery("from ChatLieu where ma =: ma");
+            query.setParameter("ma", ma);
+            return (ChatLieu) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public Boolean them(ChatLieu chatLieu){

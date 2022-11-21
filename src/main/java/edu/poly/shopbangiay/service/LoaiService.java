@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface LoaiService {
     List<Loai> getList();
-    Loai getOne(String ma);
+    Loai getLoaiByMa(String ma);
     List<Loai> timKiem(String ten);
     Boolean them(Loai loai);
     Boolean sua(Loai loai);

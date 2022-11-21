@@ -17,7 +17,7 @@ public class SizeRepository {
         return query.getResultList();
     }
 
-    public List<Size> timKiem(String soSize){
+    public List<Size> timKiem(Integer soSize){
         Query query = session.createQuery("from Size where soSize =: soSize");
         query.setParameter("soSize", soSize);
         return query.getResultList();

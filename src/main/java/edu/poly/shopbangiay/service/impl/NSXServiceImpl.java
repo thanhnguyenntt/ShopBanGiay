@@ -15,8 +15,8 @@ public class NSXServiceImpl implements NSXService {
     }
 
     @Override
-    public NSX getOne(String ma) {
-        return null;
+    public NSX getNSXByMa(String ma) {
+        return nsxRepository.getNSXByMa(ma);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class NSXServiceImpl implements NSXService {
 
     @Override
     public Boolean sua(NSX nsx) {
-        return sua(nsx);
+        return nsxRepository.sua(nsx);
     }
 
     @Override

@@ -2,6 +2,7 @@ package edu.poly.shopbangiay.repository;
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
 import edu.poly.shopbangiay.model.Loai;
+import edu.poly.shopbangiay.model.NSX;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,6 +22,16 @@ public class LoaiRepository {
         Query query = session.createQuery("from Loai where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
+    }
+
+    public Loai getLoaiByMa(String ma){
+        try{
+            Query query = session.createQuery("from Loai where ma =: ma");
+            query.setParameter("ma", ma);
+            return (Loai) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public Boolean them(Loai loai){

@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface NSXService {
     List<NSX> getList();
-    NSX getOne(String ma);
+
+    NSX getNSXByMa(String ma);
     List<NSX> timKiem(String ten);
     Boolean them(NSX nsx);
     Boolean sua(NSX nsx);

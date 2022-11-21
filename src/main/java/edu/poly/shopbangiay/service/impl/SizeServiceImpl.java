@@ -20,9 +20,10 @@ public class SizeServiceImpl implements SizeService {
     }
 
     @Override
-    public List<Size> timKiem(String ten) {
-        return sizeRepository.timKiem(ten);
+    public List<Size> timKiem(Integer soSize) {
+        return sizeRepository.timKiem(soSize);
     }
+
 
     @Override
     public Boolean them(Size size) {

@@ -15,9 +15,10 @@ public class MauSacServiceImpl implements MauSacService {
     }
 
     @Override
-    public MauSac getOne(String ma) {
-        return null;
+    public MauSac getMSByMa(String ma) {
+        return mauSacRepository.getMSByMa(ma);
     }
+
 
     @Override
     public List<MauSac> timKiem(String ten) {

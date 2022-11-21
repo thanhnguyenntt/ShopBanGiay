@@ -15,9 +15,10 @@ public class ChatLieuServiceImpl implements ChatLieuService {
     }
 
     @Override
-    public ChatLieu getOne(String ma) {
-        return null;
+    public ChatLieu getCLByMa(String ma) {
+        return chatLieuRepository.getCLByMa(ma);
     }
+
 
     @Override
     public List<ChatLieu> timKiem(String ten) {

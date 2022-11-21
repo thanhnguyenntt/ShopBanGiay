@@ -15,9 +15,10 @@ public class LoaiServiceImpl implements LoaiService {
     }
 
     @Override
-    public Loai getOne(String ma) {
-        return null;
+    public Loai getLoaiByMa(String ma) {
+        return loaiRepository.getLoaiByMa(ma);
     }
+
 
     @Override
     public List<Loai> timKiem(String ten) {

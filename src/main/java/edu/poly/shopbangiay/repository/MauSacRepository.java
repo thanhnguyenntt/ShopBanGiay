@@ -2,6 +2,7 @@ package edu.poly.shopbangiay.repository;
 
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
+import edu.poly.shopbangiay.model.Loai;
 import edu.poly.shopbangiay.model.MauSac;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,6 +23,16 @@ public class MauSacRepository {
         Query query = session.createQuery("from MauSac where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
+    }
+
+    public MauSac getMSByMa(String ma){
+        try {
+            Query query = session.createQuery("from MauSac where ma =: ma");
+            query.setParameter("ma", ma);
+            return (MauSac) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public Boolean them(MauSac mauSac){
