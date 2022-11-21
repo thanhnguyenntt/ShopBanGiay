@@ -1,5 +1,5 @@
 create database shopBanGiay
-use shopBanGiay
+
 
 insert into SanPham values (newid(), 'sp4', 'Giay ahi')
 insert into ChatLieu values (newid(), 'cl1', 'thep')
