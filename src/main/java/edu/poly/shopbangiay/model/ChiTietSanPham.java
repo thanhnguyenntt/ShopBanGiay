@@ -16,33 +16,31 @@ import java.util.List;
 @Entity
 public class ChiTietSanPham implements Serializable {
     @Id
-    @GeneratedValue(generator = "uuid2")
-        @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition="uniqueidentifier")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "IDSP", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDSP")
     private SanPham sanPham;
 
     @ManyToOne
-    @JoinColumn(name = "IDNSX", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDNSX")
     private NSX nsx;
 
     @ManyToOne
-    @JoinColumn(name = "IDMS", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDMS")
     private MauSac mauSac;
 
     @ManyToOne
-    @JoinColumn(name = "IDCL", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDCL")
     private ChatLieu chatLieu;
 
     @ManyToOne
-    @JoinColumn(name = "IDSize", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDSize")
     private Size size;
 
     @ManyToOne
-    @JoinColumn(name = "IDLoai", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDLoai")
     private Loai loai;
 
     @Column
@@ -52,9 +50,13 @@ public class ChiTietSanPham implements Serializable {
     @Column
     private Float giaBan;
     @Column
-    private String code;
+    private String maVach;
     @Column
     private String hinhAnh;
+    @Column
+    private Boolean tinhTrang;
+    @Column
+    private String moTa;
 
     @OneToMany(mappedBy = "chiTietSanPham", fetch = FetchType.LAZY)
     private List<ChiTietHoaDon> chiTietHoaDonList;

@@ -16,17 +16,15 @@ import java.io.Serializable;
 @Entity
 public class ChiTietHoaDon implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @ManyToOne
-    @JoinColumn(name = "IDCTSP",columnDefinition="uniqueidentifier")
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @JoinColumn(name = "IDCTSP")
     private ChiTietSanPham chiTietSanPham;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "IDHD",columnDefinition="uniqueidentifier")
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @JoinColumn(name = "IDHD")
     private HoaDon hoaDon;
 
     @Column

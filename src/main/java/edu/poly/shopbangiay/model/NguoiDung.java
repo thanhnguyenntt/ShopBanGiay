@@ -20,13 +20,11 @@ import java.util.List;
 @Entity
 public class NguoiDung implements Serializable {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition="uniqueidentifier")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "IDND", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDNDCV")
     private ChucVu chucVu;
 
     @Column(unique = true, nullable = false)

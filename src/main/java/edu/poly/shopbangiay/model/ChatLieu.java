@@ -12,17 +12,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 
 @Entity
 public class ChatLieu implements Serializable {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition="uniqueidentifier")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(length = 20, unique = true, nullable = false)
+    @Column(length = 20, unique = true)
     private String ma;
 
     @Nationalized
@@ -31,4 +28,9 @@ public class ChatLieu implements Serializable {
 
     @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<ChiTietSanPham> chiTietSanPhamList;
+
+    @Override
+    public String toString() {
+        return ten;
+    }
 }

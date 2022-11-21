@@ -15,13 +15,23 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
-    public SanPham getOne(String ma) {
-        return sanPhamRepository.getOne(ma);
+    public SanPham getOne(String ten) {
+        return sanPhamRepository.getOne(ten);
     }
 
     @Override
-    public List<SanPham> timKiem(String ma) {
-        return sanPhamRepository.timKiem(ma);
+    public List<SanPham> timKiem(String ten) {
+        return sanPhamRepository.timKiem(ten);
+    }
+
+    @Override
+    public SanPham getSPByMa(String ma) {
+        return sanPhamRepository.getSPByMa(ma);
+    }
+
+    @Override
+    public String getID(String ma) {
+        return sanPhamRepository.getID(ma);
     }
 
     @Override

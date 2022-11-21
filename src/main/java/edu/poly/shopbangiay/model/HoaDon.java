@@ -19,17 +19,15 @@ import java.util.List;
 @Entity
 public class HoaDon implements Serializable {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition="uniqueidentifier")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "IDKH", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDKH")
     private KhachHang khachHang;
 
     @ManyToOne
-    @JoinColumn(name = "IDND", columnDefinition = "uniqueidentifier")
+    @JoinColumn(name = "IDND")
     private NguoiDung nguoiDung;
 
     @Column(unique = true, nullable = false)

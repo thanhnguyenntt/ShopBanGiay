@@ -17,9 +17,19 @@ public class SanPhamRepository {
         return query.getResultList();
     }
 
-    public SanPham getOne(String ma){
+    public SanPham getSPByMa(String ma){
+        try{
             Query query = session.createQuery("from SanPham where ma =: ma");
             query.setParameter("ma", ma);
+            return (SanPham) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public SanPham getOne(String ten){
+            Query query = session.createQuery("from SanPham where ten =: ten");
+            query.setParameter("ten", ten);
             return (SanPham) query.getSingleResult();
     }
 
@@ -27,6 +37,12 @@ public class SanPhamRepository {
         Query query = session.createQuery("from SanPham where ma like: ma");
         query.setParameter("ma", "%" + ma + "%");
         return query.getResultList();
+    }
+
+    public String getID(String ma){
+        Query query = session.createQuery("select sp.id from SanPham sp where sp.ma =: ma");
+        query.setParameter("ma", ma);
+        return (String) query.getSingleResult();
     }
 
     public Boolean them(SanPham sanPham){
