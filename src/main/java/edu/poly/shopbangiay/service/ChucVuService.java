@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ChucVuService {
     List<ChucVu> getList();
-    ChucVu getOne(String ma);
+    ChucVu getCVByMa(String ma);
     List<ChucVu> timKiem(String ten);
     Boolean them(ChucVu chucVu);
     Boolean sua(ChucVu chucVu);

@@ -37,7 +37,7 @@ public class NSXRepository {
         try{
             transaction = session.beginTransaction();
 
-            session.save(nsx);
+            session.saveOrUpdate(nsx);
 
             transaction.commit();
             return true;

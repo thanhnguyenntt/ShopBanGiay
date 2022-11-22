@@ -15,9 +15,10 @@ public class ChucVuServiceImpl implements ChucVuService {
     }
 
     @Override
-    public ChucVu getOne(String ma) {
-        return null;
+    public ChucVu getCVByMa(String ma) {
+        return chucVuRepository.getCVByMa(ma);
     }
+
 
     @Override
     public List<ChucVu> timKiem(String ten) {

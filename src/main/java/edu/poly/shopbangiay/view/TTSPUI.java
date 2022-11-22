@@ -304,7 +304,7 @@ public class TTSPUI extends javax.swing.JDialog {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
 
-        ChiTietSanPham chiTietSanPham = ctspService.getCTSPByMaSP(txtMaSP.getText());
+        chiTietSanPham = ctspService.getCTSPByMaSP(txtMaSP.getText());
         if (ctspService.xoa(chiTietSanPham)){
             JOptionPane.showMessageDialog(this, "Xóa thành công");
             dispose();
@@ -325,8 +325,7 @@ public class TTSPUI extends javax.swing.JDialog {
             }
         });
         dialog.setVisible(true);
-        
-        
+        dialog.loadUpdate();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     /**

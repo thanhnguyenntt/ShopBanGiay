@@ -828,7 +828,7 @@ public class QLCT extends javax.swing.JDialog {
         NSX nsx = nsxService.getList().get(row);
         nsx.setMa(txtMaNSX.getText());
         nsx.setTen(txtTenNSX.getText());
-        if (nsxService.sua(nsx)){
+        if (nsxService.them(nsx)){
             JOptionPane.showMessageDialog(this, "Sửa thành công");
             loadDataNSX(nsxService.getList());
         }else {

@@ -49,7 +49,7 @@ public class SanPhamRepository {
         try {
             transaction = session.beginTransaction();
 
-            session.save(sanPham);
+            session.saveOrUpdate(sanPham);
 
             transaction.commit();
             return true;

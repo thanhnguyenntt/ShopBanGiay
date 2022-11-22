@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.*;
 
 /**
- *
  * @author Quang
  */
 public class QLSPUI extends javax.swing.JDialog {
@@ -44,10 +43,10 @@ public class QLSPUI extends javax.swing.JDialog {
         loadCBX_MS(mauSacService.getList());
         loadCBX_NSX(nsxService.getList());
 
-        loadUpdate();
+//        loadUpdate();
     }
 
-    public void loadUpdate(){
+    public void loadUpdate() {
         txtMaSP.setText(TTSPUI.chiTietSanPham.getSanPham().getMa());
         txtTenSP.setText(TTSPUI.chiTietSanPham.getSanPham().getTen());
         txtMaVach.setText("");
@@ -60,14 +59,14 @@ public class QLSPUI extends javax.swing.JDialog {
         cbxChatLieu.setSelectedItem(TTSPUI.chiTietSanPham.getChatLieu());
         cbxNSX.setSelectedItem(TTSPUI.chiTietSanPham.getNsx());
         txtMoTa.setText(TTSPUI.chiTietSanPham.getMoTa());
-        if(TTSPUI.chiTietSanPham.getTinhTrang().toString().equalsIgnoreCase("True")){
+        if (TTSPUI.chiTietSanPham.getTinhTrang().toString().equalsIgnoreCase("True")) {
             rdoOnl.setSelected(true);
-        }else{
+        } else {
             rdoOff.setSelected(true);
         }
     }
 
-    public void loadCBX_Loai(List<Loai> list){
+    public void loadCBX_Loai(List<Loai> list) {
         defaultComboBoxModel = (DefaultComboBoxModel) cbxLoai.getModel();
         defaultComboBoxModel.removeAllElements();
 
@@ -76,7 +75,7 @@ public class QLSPUI extends javax.swing.JDialog {
         }
     }
 
-    public void loadCBX_Size(List<Size> list){
+    public void loadCBX_Size(List<Size> list) {
         defaultComboBoxModel = (DefaultComboBoxModel) cbxSize.getModel();
         defaultComboBoxModel.removeAllElements();
 
@@ -85,7 +84,7 @@ public class QLSPUI extends javax.swing.JDialog {
         }
     }
 
-    public void loadCBX_CL(List<ChatLieu> list){
+    public void loadCBX_CL(List<ChatLieu> list) {
         defaultComboBoxModel = (DefaultComboBoxModel) cbxChatLieu.getModel();
         defaultComboBoxModel.removeAllElements();
 
@@ -94,7 +93,7 @@ public class QLSPUI extends javax.swing.JDialog {
         }
     }
 
-    public void loadCBX_MS(List<MauSac> list){
+    public void loadCBX_MS(List<MauSac> list) {
         defaultComboBoxModel = (DefaultComboBoxModel) cbxMauSac.getModel();
         defaultComboBoxModel.removeAllElements();
 
@@ -103,7 +102,7 @@ public class QLSPUI extends javax.swing.JDialog {
         }
     }
 
-    public void loadCBX_NSX(List<NSX> list){
+    public void loadCBX_NSX(List<NSX> list) {
         defaultComboBoxModel = (DefaultComboBoxModel) cbxNSX.getModel();
         defaultComboBoxModel.removeAllElements();
 
@@ -123,7 +122,8 @@ public class QLSPUI extends javax.swing.JDialog {
     }
 
     ButtonGroup rdoTrangThai = new ButtonGroup();
-    public void groupTT(){
+
+    public void groupTT() {
         rdoTrangThai.add(rdoOnl);
         rdoTrangThai.add(rdoOff);
     }
@@ -348,18 +348,19 @@ public class QLSPUI extends javax.swing.JDialog {
                     .addComponent(cbxLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaVach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(btnThemSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnThemSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtMaVach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnThemChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -433,49 +434,46 @@ public class QLSPUI extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        SanPham newSP = new SanPham();
-        newSP.setMa(genMaSP());
-        newSP.setTen(txtTenSP.getText());
+        ChiTietSanPham ctsp = new ChiTietSanPham();
 
-        if(sanPhamService.them(newSP)){
-            ChiTietSanPham ctsp = new ChiTietSanPham();
-            ctsp.setId(TTSPUI.chiTietSanPham.getId());
-            newSP.setMa(txtMaSP.getText());
-            ctsp.setSanPham(newSP);
+        SanPham sanPham = new SanPham();
+        sanPham.setMa(genMaSP());
+        sanPham.setTen(txtTenSP.getText());
+        sanPhamService.them(sanPham);
 
-            Loai loai = loaiService.getList().get(cbxLoai.getSelectedIndex());
-            ctsp.setLoai(loai);
+        ctsp.setSanPham(sanPham);
 
-            Size size = sizeService.getList().get(cbxSize.getSelectedIndex());
-            ctsp.setSize(size);
+        Loai loai = loaiService.getList().get(cbxLoai.getSelectedIndex());
+        ctsp.setLoai(loai);
 
-            ChatLieu chatLieu = chatLieuService.getList().get(cbxChatLieu.getSelectedIndex());
-            ctsp.setChatLieu(chatLieu);
+        Size size = sizeService.getList().get(cbxSize.getSelectedIndex());
+        ctsp.setSize(size);
 
-            MauSac mauSac = mauSacService.getList().get(cbxMauSac.getSelectedIndex());
-            ctsp.setMauSac(mauSac);
+        ChatLieu chatLieu = chatLieuService.getList().get(cbxChatLieu.getSelectedIndex());
+        ctsp.setChatLieu(chatLieu);
 
-            NSX nsx = nsxService.getList().get(cbxNSX.getSelectedIndex());
-            ctsp.setNsx(nsx);
+        MauSac mauSac = mauSacService.getList().get(cbxMauSac.getSelectedIndex());
+        ctsp.setMauSac(mauSac);
 
-            ctsp.setMaVach(null);
-            ctsp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
-            ctsp.setGiaNhap(Float.parseFloat(txtGiaNhap.getText()));
-            ctsp.setGiaBan(Float.parseFloat(txtGiaBan.getText()));
-            ctsp.setMoTa(txtMoTa.getText());
+        NSX nsx = nsxService.getList().get(cbxNSX.getSelectedIndex());
+        ctsp.setNsx(nsx);
 
-            boolean tinhTrang = !rdoOff.isSelected();
-            ctsp.setTinhTrang(tinhTrang);
-            ctsp.setHinhAnh(null);
+        ctsp.setMaVach(null);
+        ctsp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+        ctsp.setGiaNhap(Float.parseFloat(txtGiaNhap.getText()));
+        ctsp.setGiaBan(Float.parseFloat(txtGiaBan.getText()));
+        ctsp.setMoTa(txtMoTa.getText());
 
-            if (ctspService.them(ctsp)) {
-                JOptionPane.showMessageDialog(this, "Thành công");
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Thất bại");
-            }
-        }else {
-            JOptionPane.showMessageDialog(this, "hmmm");
+        boolean tinhTrang = !rdoOff.isSelected();
+        ctsp.setTinhTrang(tinhTrang);
+        ctsp.setHinhAnh(null);
+
+        if (ctspService.them(ctsp)) {
+            JOptionPane.showMessageDialog(this, "Thành công");
+            dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Thất bại");
         }
 
     }//GEN-LAST:event_btnSaveActionPerformed

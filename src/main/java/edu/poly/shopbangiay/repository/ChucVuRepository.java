@@ -1,6 +1,7 @@
 package edu.poly.shopbangiay.repository;
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
+import edu.poly.shopbangiay.model.ChatLieu;
 import edu.poly.shopbangiay.model.ChucVu;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,6 +22,16 @@ public class ChucVuRepository {
         Query query = session.createQuery("from ChucVu where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
+    }
+
+    public ChucVu getCVByMa(String ma){
+        try {
+            Query query = session.createQuery("from ChucVu where ma =: ma");
+            query.setParameter("ma", ma);
+            return (ChucVu) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public Boolean them(ChucVu chucVu){
