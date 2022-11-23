@@ -9,22 +9,23 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class CTSPRepository {
-    Session session = Hibernate.getFACTORY().openSession();
-    Transaction transaction;
+
 
     public List<ChiTietSanPham> getList(){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChiTietSanPham ");
         return query.getResultList();
     }
 
     public List<ChiTietSanPham> timKiem(String ten){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChiTietSanPham ctsp where ctsp.sanPham.ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public ChiTietSanPham getCTSPByMaSP(String maSP){
-        try {
+        try (Session session = Hibernate.getFACTORY().openSession();){
             Query query = session.createQuery("from ChiTietSanPham ctsp where ctsp.sanPham.ma =: ma ");
             query.setParameter("ma", maSP);
             return (ChiTietSanPham) query.getSingleResult();
@@ -34,7 +35,8 @@ public class CTSPRepository {
     }
 
     public Boolean them(ChiTietSanPham ctsp){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.saveOrUpdate(ctsp);
@@ -49,7 +51,8 @@ public class CTSPRepository {
     }
 
     public Boolean sua(ChiTietSanPham ctsp){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.update(ctsp);
@@ -64,7 +67,8 @@ public class CTSPRepository {
     }
 
     public Boolean xoa(ChiTietSanPham ctsp){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.delete(ctsp);

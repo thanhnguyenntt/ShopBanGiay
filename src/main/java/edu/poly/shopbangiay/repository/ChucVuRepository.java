@@ -10,22 +10,23 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class ChucVuRepository {
-    Session session = Hibernate.getFACTORY().openSession();
-    Transaction transaction;
+
 
     public List<ChucVu> getList(){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChucVu ");
         return query.getResultList();
     }
 
     public List<ChucVu> timKiem(String ten){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChucVu where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public ChucVu getCVByMa(String ma){
-        try {
+        try (Session session = Hibernate.getFACTORY().openSession()){
             Query query = session.createQuery("from ChucVu where ma =: ma");
             query.setParameter("ma", ma);
             return (ChucVu) query.getSingleResult();
@@ -35,7 +36,8 @@ public class ChucVuRepository {
     }
 
     public Boolean them(ChucVu chucVu){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.save(chucVu);
@@ -50,7 +52,8 @@ public class ChucVuRepository {
     }
 
     public Boolean sua(ChucVu chucVu){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.update(chucVu);
@@ -65,7 +68,8 @@ public class ChucVuRepository {
     }
 
     public Boolean xoa(ChucVu chucVu){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.delete(chucVu);

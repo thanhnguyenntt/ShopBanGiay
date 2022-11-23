@@ -36,6 +36,7 @@ public class Hibernate {
         conf.addAnnotatedClass(NSX.class);
         conf.addAnnotatedClass(SanPham.class);
         conf.addAnnotatedClass(Size.class);
+        conf.addAnnotatedClass(Voucher.class);
 
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();

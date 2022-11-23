@@ -5,7 +5,6 @@
 package edu.poly.shopbangiay.view;
 
 import edu.poly.shopbangiay.model.ChiTietSanPham;
-import edu.poly.shopbangiay.model.SanPham;
 import edu.poly.shopbangiay.service.CTSPService;
 import edu.poly.shopbangiay.service.impl.CTSPServiceImpl;
 import edu.poly.shopbangiay.viewModel.VMCTSP;
@@ -235,7 +234,7 @@ public class SanPhamUI extends javax.swing.JPanel {
 
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
         // TODO add your handling code here:
-        QLSPUI dialog = new QLSPUI(new javax.swing.JFrame(), true);
+        AddSPUI dialog = new AddSPUI(new javax.swing.JFrame(), true);
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -258,7 +257,7 @@ public class SanPhamUI extends javax.swing.JPanel {
             }
         });
         dialog.setVisible(true);
-
+        loadData(ctspService.getListVMCTSP());
 
     }//GEN-LAST:event_tblCTSPMouseClicked
 

@@ -9,59 +9,63 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class KhachHangRepository {
-    Session session = Hibernate.getFACTORY().openSession();
-    Transaction transaction;
 
-    public List<KhachHang> getList(){
+
+    public List<KhachHang> getList() {
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from KhachHang ");
         return query.getResultList();
     }
 
-    public List<KhachHang> timKiem(String ten){
+    public List<KhachHang> timKiem(String ten) {
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from KhachHang where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
-    public Boolean them(KhachHang khachHang){
-        try{
+    public Boolean them(KhachHang khachHang) {
+        Transaction transaction = null;
+        try (Session session = Hibernate.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
 
             session.save(khachHang);
 
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
             return false;
         }
     }
 
-    public Boolean sua(KhachHang khachHang){
-        try{
+    public Boolean sua(KhachHang khachHang) {
+        Transaction transaction = null;
+        try (Session session = Hibernate.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
 
             session.update(khachHang);
 
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
             return false;
         }
     }
 
-    public Boolean xoa(KhachHang khachHang){
-        try{
+    public Boolean xoa(KhachHang khachHang) {
+        Transaction transaction = null;
+        try (Session session = Hibernate.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
 
             session.delete(khachHang);
 
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
             return false;

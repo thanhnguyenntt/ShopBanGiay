@@ -2,7 +2,6 @@ package edu.poly.shopbangiay.repository;
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
 import edu.poly.shopbangiay.model.ChiTietHoaDon;
-import edu.poly.shopbangiay.model.ChiTietSanPham;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,15 +9,15 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class CTHDRepository {
-    Session session = Hibernate.getFACTORY().openSession();
-    Transaction transaction;
 
     public List<ChiTietHoaDon> getList(){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChiTietHoaDon ");
         return query.getResultList();
     }
 
     public List<ChiTietHoaDon> timKiem(String ma){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChiTietHoaDon cthd where cthd.hoaDon.ma like: maHD or cthd.chiTietSanPham.sanPham.ma like: maSP");
         query.setParameter("maHD", "%" + ma + "%");
         query.setParameter("maSP", "%" + ma + "%");
@@ -26,7 +25,8 @@ public class CTHDRepository {
     }
 
     public Boolean them(ChiTietHoaDon cthd){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.save(cthd);
@@ -41,7 +41,8 @@ public class CTHDRepository {
     }
 
     public Boolean sua(ChiTietHoaDon cthd){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.update(cthd);
@@ -56,7 +57,8 @@ public class CTHDRepository {
     }
 
     public Boolean xoa(ChiTietHoaDon cthd){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.delete(cthd);

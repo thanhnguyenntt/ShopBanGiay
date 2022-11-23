@@ -9,22 +9,25 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class NguoiDungRepository {
-    Session session = Hibernate.getFACTORY().openSession();
-    Transaction transaction;
+
+
 
     public List<NguoiDung> getList(){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from NguoiDung ");
         return query.getResultList();
     }
 
     public List<NguoiDung> timKiem(String ten){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from NguoiDung where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public Boolean them(NguoiDung nguoiDung){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.save(nguoiDung);
@@ -39,7 +42,8 @@ public class NguoiDungRepository {
     }
 
     public Boolean sua(NguoiDung nguoiDung){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.update(nguoiDung);
@@ -54,7 +58,8 @@ public class NguoiDungRepository {
     }
 
     public Boolean xoa(NguoiDung nguoiDung){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.delete(nguoiDung);

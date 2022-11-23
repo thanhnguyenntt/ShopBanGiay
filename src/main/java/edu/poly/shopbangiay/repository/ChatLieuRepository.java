@@ -2,7 +2,6 @@ package edu.poly.shopbangiay.repository;
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
 import edu.poly.shopbangiay.model.ChatLieu;
-import edu.poly.shopbangiay.model.Loai;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,22 +9,22 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class ChatLieuRepository {
-    Session session = Hibernate.getFACTORY().openSession();
-    Transaction transaction;
 
     public List<ChatLieu> getList(){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChatLieu ");
         return query.getResultList();
     }
 
     public List<ChatLieu> timKiem(String ten){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChatLieu where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public ChatLieu getCLByMa(String ma){
-        try {
+        try (Session session = Hibernate.getFACTORY().openSession()){
             Query query = session.createQuery("from ChatLieu where ma =: ma");
             query.setParameter("ma", ma);
             return (ChatLieu) query.getSingleResult();
@@ -35,7 +34,8 @@ public class ChatLieuRepository {
     }
 
     public Boolean them(ChatLieu chatLieu){
-        try{
+        Transaction transaction= null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.save(chatLieu);
@@ -50,7 +50,8 @@ public class ChatLieuRepository {
     }
 
     public Boolean sua(ChatLieu chatLieu){
-        try{
+        Transaction transaction= null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.update(chatLieu);
@@ -65,7 +66,8 @@ public class ChatLieuRepository {
     }
 
     public Boolean xoa(ChatLieu chatLieu){
-        try{
+        Transaction transaction= null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.delete(chatLieu);

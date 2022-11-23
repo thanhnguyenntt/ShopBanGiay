@@ -1,7 +1,6 @@
 package edu.poly.shopbangiay.model;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
@@ -29,4 +28,5 @@ public class SanPham implements Serializable {
 
     @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<ChiTietSanPham> chiTietSanPhamList;
+
 }

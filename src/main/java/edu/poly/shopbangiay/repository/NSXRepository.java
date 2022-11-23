@@ -9,22 +9,23 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class NSXRepository {
-    Session session = Hibernate.getFACTORY().openSession();
-    Transaction transaction;
+
 
     public List<NSX> getList(){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from NSX ");
         return query.getResultList();
     }
 
     public List<NSX> timKiem(String ten){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from NSX where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public NSX getNSXByMa(String ma){
-        try {
+        try (Session session = Hibernate.getFACTORY().openSession()){
             Query query = session.createQuery("from NSX where ma =: ma");
             query.setParameter("ma", ma);
             return (NSX) query.getSingleResult();
@@ -34,7 +35,8 @@ public class NSXRepository {
     }
 
     public Boolean them(NSX nsx){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.saveOrUpdate(nsx);
@@ -49,7 +51,8 @@ public class NSXRepository {
     }
 
     public Boolean sua(NSX nsx){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.update(nsx);
@@ -64,7 +67,8 @@ public class NSXRepository {
     }
 
     public Boolean xoa(NSX nsx){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.delete(nsx);

@@ -60,4 +60,5 @@ public class ChiTietSanPham implements Serializable {
 
     @OneToMany(mappedBy = "chiTietSanPham", fetch = FetchType.LAZY)
     private List<ChiTietHoaDon> chiTietHoaDonList;
+
 }

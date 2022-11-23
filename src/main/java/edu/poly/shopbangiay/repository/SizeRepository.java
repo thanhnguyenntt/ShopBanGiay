@@ -9,22 +9,23 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class SizeRepository {
-    Session session = Hibernate.getFACTORY().openSession();
-    Transaction transaction;
 
     public List<Size> getList(){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from Size ");
         return query.getResultList();
     }
 
     public List<Size> timKiem(Integer soSize){
+        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from Size where soSize =: soSize");
         query.setParameter("soSize", soSize);
         return query.getResultList();
     }
 
     public Boolean them(Size size){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.save(size);
@@ -39,7 +40,8 @@ public class SizeRepository {
     }
 
     public Boolean sua(Size size){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.update(size);
@@ -54,7 +56,8 @@ public class SizeRepository {
     }
 
     public Boolean xoa(Size size){
-        try{
+        Transaction transaction = null;
+        try(Session session = Hibernate.getFACTORY().openSession()){
             transaction = session.beginTransaction();
 
             session.delete(size);
