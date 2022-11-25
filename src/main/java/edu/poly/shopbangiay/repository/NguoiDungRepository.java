@@ -25,6 +25,16 @@ public class NguoiDungRepository {
         return query.getResultList();
     }
 
+    public NguoiDung getNDByMa(String ma){
+        try(Session session = Hibernate.getFACTORY().openSession()){
+            Query query = session.createQuery("from NguoiDung where ma =: ma");
+            query.setParameter("ma", ma);
+            return (NguoiDung) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     public Boolean them(NguoiDung nguoiDung){
         Transaction transaction = null;
         try(Session session = Hibernate.getFACTORY().openSession()){

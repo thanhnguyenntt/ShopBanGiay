@@ -65,19 +65,20 @@ public class UpdateSPUI extends javax.swing.JDialog {
     }
 
     public void loadUpdate() {
-        txtMaSP.setText(TTSPUI.chiTietSanPham.getSanPham().getMa());
-        txtTenSP.setText(TTSPUI.chiTietSanPham.getSanPham().getTen());
+        ChiTietSanPham chiTietSanPham = SanPhamUI.chiTietSanPham;
+        txtMaSP.setText(chiTietSanPham.getSanPham().getMa());
+        txtTenSP.setText(chiTietSanPham.getSanPham().getTen());
         txtMaVach.setText("");
-        txtSoLuong.setText(TTSPUI.chiTietSanPham.getSoLuong().toString());
-        txtGiaNhap.setText(TTSPUI.chiTietSanPham.getGiaNhap().toString());
-        txtGiaBan.setText(TTSPUI.chiTietSanPham.getGiaBan().toString());
-        cbxLoai.setSelectedItem(TTSPUI.chiTietSanPham.getLoai());
-        cbxMauSac.setSelectedItem(TTSPUI.chiTietSanPham.getMauSac());
-        cbxSize.setSelectedItem(TTSPUI.chiTietSanPham.getSize());
-        cbxChatLieu.setSelectedItem(TTSPUI.chiTietSanPham.getChatLieu());
-        cbxNSX.setSelectedItem(TTSPUI.chiTietSanPham.getNsx());
-        txtMoTa.setText(TTSPUI.chiTietSanPham.getMoTa());
-        if (TTSPUI.chiTietSanPham.getTinhTrang().toString().equalsIgnoreCase("True")) {
+        txtSoLuong.setText(SanPhamUI.chiTietSanPham.getSoLuong().toString());
+        txtGiaNhap.setText(SanPhamUI.chiTietSanPham.getGiaNhap().toString());
+        txtGiaBan.setText(SanPhamUI.chiTietSanPham.getGiaBan().toString());
+        cbxLoai.setSelectedItem(chiTietSanPham.getLoai());
+        cbxMauSac.setSelectedItem(chiTietSanPham.getMauSac());
+        cbxSize.setSelectedItem(chiTietSanPham.getSize());
+        cbxChatLieu.setSelectedItem(chiTietSanPham.getChatLieu());
+        cbxNSX.setSelectedItem(chiTietSanPham.getNsx());
+        txtMoTa.setText(SanPhamUI.chiTietSanPham.getMoTa());
+        if (SanPhamUI.chiTietSanPham.getTinhTrang().toString().equalsIgnoreCase("True")) {
             rdoOnl.setSelected(true);
         } else {
             rdoOff.setSelected(true);
@@ -443,6 +444,7 @@ public class UpdateSPUI extends javax.swing.JDialog {
 
         if (ctspService.sua(ctsp)) {
             JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Cập nhật thất bại");

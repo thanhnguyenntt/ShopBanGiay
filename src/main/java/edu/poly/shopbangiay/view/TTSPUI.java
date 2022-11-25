@@ -19,14 +19,11 @@ public class TTSPUI extends javax.swing.JDialog {
     /**
      */
     private CTSPService ctspService = new CTSPServiceImpl();
-    public static ChiTietSanPham chiTietSanPham;
-
     public TTSPUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
         loadData();
     }
 
@@ -303,7 +300,7 @@ public class TTSPUI extends javax.swing.JDialog {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        chiTietSanPham = ctspService.getCTSPByMaSP(txtMaSP.getText());
+        ChiTietSanPham chiTietSanPham = ctspService.getCTSPByMaSP(txtMaSP.getText());
         if (ctspService.xoa(chiTietSanPham)) {
             JOptionPane.showMessageDialog(this, "Xóa thành công");
             dispose();
@@ -314,7 +311,7 @@ public class TTSPUI extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        chiTietSanPham = ctspService.getCTSPByMaSP(txtMaSP.getText());
+//        chiTietSanPham = ctspService.getCTSPByMaSP(txtMaSP.getText());
         dispose();
         UpdateSPUI dialog = new UpdateSPUI(new javax.swing.JFrame(), true);
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {

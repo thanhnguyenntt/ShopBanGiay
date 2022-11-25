@@ -24,7 +24,7 @@ public class NguoiDung implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "IDNDCV")
+    @JoinColumn(name = "IDCV")
     private ChucVu chucVu;
 
     @Column(unique = true, nullable = false)

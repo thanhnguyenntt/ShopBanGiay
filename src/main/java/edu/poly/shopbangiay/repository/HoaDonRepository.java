@@ -23,6 +23,16 @@ public class HoaDonRepository {
         return query.getResultList();
     }
 
+    public HoaDon getHDByMa(String ma){
+        try(Session session = Hibernate.getFACTORY().openSession()){
+            Query query = session.createQuery("from HoaDon where ma=: ma");
+            query.setParameter("ma", ma);
+            return (HoaDon) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     public Boolean them(HoaDon hoaDon) {
         Transaction transaction = null;
         try (Session session = Hibernate.getFACTORY().openSession()) {

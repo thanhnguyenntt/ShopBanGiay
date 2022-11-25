@@ -17,10 +17,12 @@ public class CTSPRepository {
         return query.getResultList();
     }
 
+
     public List<ChiTietSanPham> timKiem(String ten){
         Session session = Hibernate.getFACTORY().openSession();
-        Query query = session.createQuery("from ChiTietSanPham ctsp where ctsp.sanPham.ten like: ten");
+        Query query = session.createQuery("from ChiTietSanPham ctsp where ctsp.sanPham.ten like: ten or ctsp.sanPham.ma like: ma");
         query.setParameter("ten", "%" + ten + "%");
+        query.setParameter("ma", "%" + ten + "%");
         return query.getResultList();
     }
 

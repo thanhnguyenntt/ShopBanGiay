@@ -15,8 +15,8 @@ public class NguoiDungServiceImpl implements NguoiDungService {
     }
 
     @Override
-    public NguoiDung getOne(String ma) {
-        return null;
+    public NguoiDung getNDByMa(String ma) {
+        return nguoiDungRepository.getNDByMa(ma);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface NguoiDungService {
     List<NguoiDung> getList();
-    NguoiDung getOne(String ma);
+    NguoiDung getNDByMa(String ma);
     List<NguoiDung> timKiem(String ten);
     Boolean them(NguoiDung nguoiDung);
     Boolean sua(NguoiDung nguoiDung);

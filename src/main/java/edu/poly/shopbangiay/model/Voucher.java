@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Nationalized;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,5 +19,37 @@ import java.io.Serializable;
 @Entity
 public class Voucher implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(unique = true)
+    private String ma;
+
+    @Column
+    @Nationalized
+    private String ten;
+
+    @Column
+    private Integer phanTramGiam;
+
+    @Column
+    private Integer soLuong;
+
+    @Column
+    private Date ngayTao;
+
+    @Column
+    private Date ngayBD;
+
+    @Column
+    private Date ngayKT;
+
+    @Column
+    private String moTa;
+
+    @Column
+    private String trangThai;
+
+    @OneToMany(mappedBy = "voucher", fetch = FetchType.LAZY)
+    private List<HoaDon> hoaDonList;
 }

@@ -5,6 +5,9 @@
 package edu.poly.shopbangiay.view;
 
 
+import edu.poly.shopbangiay.service.NguoiDungService;
+import edu.poly.shopbangiay.service.impl.NguoiDungServiceImpl;
+
 /**
  *
  * @author Quang
@@ -14,6 +17,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    private NguoiDungService nguoiDungService = new NguoiDungServiceImpl();
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -298,7 +302,9 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if(check()){
-            
+            Main main = new Main();
+            main.setVisible(true);
+            dispose();
         }
         System.out.println(txtPass.getText());
     }//GEN-LAST:event_btnLoginMouseClicked

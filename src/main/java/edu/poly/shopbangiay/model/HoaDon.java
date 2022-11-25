@@ -30,6 +30,10 @@ public class HoaDon implements Serializable {
     @JoinColumn(name = "IDND")
     private NguoiDung nguoiDung;
 
+    @ManyToOne
+    @JoinColumn(name = "IDVC")
+    private Voucher voucher;
+
     @Column(unique = true, nullable = false)
     private String ma;
     @Column

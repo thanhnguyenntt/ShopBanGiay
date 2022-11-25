@@ -28,9 +28,11 @@ public class ChiTietHoaDon implements Serializable {
     private HoaDon hoaDon;
 
     @Column
-    private Float thanhTien;
-    @Column
-    private Float tongTien;
+    private Float donGia;
     @Column
     private Integer soLuong;
+
+    public Float tongTien(){
+        return soLuong * donGia;
+    }
 }

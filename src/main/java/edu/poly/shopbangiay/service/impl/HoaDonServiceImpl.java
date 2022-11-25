@@ -20,6 +20,11 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
+    public HoaDon getHDByMa(String ma) {
+        return hoaDonRepository.getHDByMa(ma);
+    }
+
+    @Override
     public List<HoaDon> timKiem(String ten) {
         return hoaDonRepository.timKiem(ten);
     }

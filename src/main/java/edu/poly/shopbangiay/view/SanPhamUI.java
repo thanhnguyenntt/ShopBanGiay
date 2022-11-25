@@ -11,6 +11,8 @@ import edu.poly.shopbangiay.viewModel.VMCTSP;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JOptionPane;
+import table.TableCustom;
 
 /**
  *
@@ -29,6 +31,7 @@ public class SanPhamUI extends javax.swing.JPanel {
     public SanPhamUI() {
         initComponents();
         loadData(ctspService.getListVMCTSP());
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
 
     }
 
@@ -82,11 +85,12 @@ public class SanPhamUI extends javax.swing.JPanel {
         jPanel15 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnThemSP = new edu.poly.shopbangiay.raven.button.Button();
-        button2 = new edu.poly.shopbangiay.raven.button.Button();
-        button3 = new edu.poly.shopbangiay.raven.button.Button();
+        btnNhapFile = new edu.poly.shopbangiay.raven.button.Button();
+        btnXuatFile = new edu.poly.shopbangiay.raven.button.Button();
         txtTimKiem = new textfield.TextFie();
         btnQL = new edu.poly.shopbangiay.raven.button.Button();
         jPanel2 = new javax.swing.JPanel();
+        tableScrollButton1 = new table.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCTSP = new javax.swing.JTable();
 
@@ -103,21 +107,21 @@ public class SanPhamUI extends javax.swing.JPanel {
             }
         });
 
-        button2.setBackground(new java.awt.Color(153, 255, 153));
-        button2.setText("Nhập file");
-        button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        button2.addActionListener(new java.awt.event.ActionListener() {
+        btnNhapFile.setBackground(new java.awt.Color(153, 255, 153));
+        btnNhapFile.setText("Nhập file");
+        btnNhapFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnNhapFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
+                btnNhapFileActionPerformed(evt);
             }
         });
 
-        button3.setBackground(new java.awt.Color(153, 255, 153));
-        button3.setText("xuất file");
-        button3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        button3.addActionListener(new java.awt.event.ActionListener() {
+        btnXuatFile.setBackground(new java.awt.Color(153, 255, 153));
+        btnXuatFile.setText("Xuất file");
+        btnXuatFile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
+                btnXuatFileActionPerformed(evt);
             }
         });
 
@@ -150,14 +154,14 @@ public class SanPhamUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addComponent(btnThemSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNhapFile, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,8 +169,8 @@ public class SanPhamUI extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNhapFile, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemSP, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -190,15 +194,17 @@ public class SanPhamUI extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblCTSP);
 
+        tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1059, Short.MAX_VALUE)
+            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -242,6 +248,7 @@ public class SanPhamUI extends javax.swing.JPanel {
             }
         });
         dialog.setVisible(true);
+        loadData(ctspService.getListVMCTSP());
     }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void tblCTSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCTSPMouseClicked
@@ -274,14 +281,15 @@ public class SanPhamUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtTimKiemMouseClicked
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+    private void btnNhapFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileActionPerformed
         // TODO add your handling code here:
-        loadData(ctspService.getListVMCTSP());
-    }//GEN-LAST:event_button2ActionPerformed
+        JOptionPane.showMessageDialog(this, "Đang phát triển =))");
+       
+    }//GEN-LAST:event_btnNhapFileActionPerformed
 
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button3ActionPerformed
+    }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
         // TODO add your handling code here:
@@ -297,14 +305,15 @@ public class SanPhamUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private edu.poly.shopbangiay.raven.button.Button btnNhapFile;
     private edu.poly.shopbangiay.raven.button.Button btnQL;
     private edu.poly.shopbangiay.raven.button.Button btnThemSP;
-    private edu.poly.shopbangiay.raven.button.Button button2;
-    private edu.poly.shopbangiay.raven.button.Button button3;
+    private edu.poly.shopbangiay.raven.button.Button btnXuatFile;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private table.TableScrollButton tableScrollButton1;
     private javax.swing.JTable tblCTSP;
     private textfield.TextFie txtTimKiem;
     // End of variables declaration//GEN-END:variables

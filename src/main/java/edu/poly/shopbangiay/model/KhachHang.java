@@ -44,4 +44,9 @@ public class KhachHang implements Serializable {
 
     @OneToMany(mappedBy = "khachHang", fetch = FetchType.LAZY)
     private List<HoaDon> hoaDonList;
+
+    @Override
+    public String toString() {
+        return ten + '-' + sdt;
+    }
 }
