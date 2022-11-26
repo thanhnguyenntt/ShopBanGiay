@@ -11,21 +11,22 @@ import java.util.List;
 
 public class MauSacRepository {
 
+    Session session = Hibernate.getFACTORY().openSession();
+    Transaction transaction = null;
+
     public List<MauSac> getList() {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from MauSac ");
         return query.getResultList();
     }
 
     public List<MauSac> timKiem(String ten) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from MauSac where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public MauSac getMSByMa(String ma) {
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("from MauSac where ma =: ma");
             query.setParameter("ma", ma);
             return (MauSac) query.getSingleResult();
@@ -35,8 +36,7 @@ public class MauSacRepository {
     }
 
     public Boolean them(MauSac mauSac) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.save(mauSac);
@@ -51,8 +51,7 @@ public class MauSacRepository {
     }
 
     public Boolean sua(MauSac mauSac) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.update(mauSac);
@@ -67,8 +66,7 @@ public class MauSacRepository {
     }
 
     public Boolean xoa(MauSac mauSac) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.delete(mauSac);

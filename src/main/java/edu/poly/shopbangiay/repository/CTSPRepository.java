@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.repository;
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
-import edu.poly.shopbangiay.model.ChiTietSanPham;
+import edu.poly.shopbangiay.model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,16 +10,16 @@ import java.util.List;
 
 public class CTSPRepository {
 
+    Session session = Hibernate.getFACTORY().openSession();
+    Transaction transaction = null;
 
     public List<ChiTietSanPham> getList(){
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChiTietSanPham ");
         return query.getResultList();
     }
 
 
     public List<ChiTietSanPham> timKiem(String ten){
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChiTietSanPham ctsp where ctsp.sanPham.ten like: ten or ctsp.sanPham.ma like: ma");
         query.setParameter("ten", "%" + ten + "%");
         query.setParameter("ma", "%" + ten + "%");
@@ -27,7 +27,7 @@ public class CTSPRepository {
     }
 
     public ChiTietSanPham getCTSPByMaSP(String maSP){
-        try (Session session = Hibernate.getFACTORY().openSession();){
+        try{
             Query query = session.createQuery("from ChiTietSanPham ctsp where ctsp.sanPham.ma =: ma ");
             query.setParameter("ma", maSP);
             return (ChiTietSanPham) query.getSingleResult();
@@ -36,9 +36,33 @@ public class CTSPRepository {
         }
     }
 
+    public List<Loai> listLoai(){
+        Query query = session.createQuery("from Loai ");
+        return query.getResultList();
+    }
+
+    public List<NSX> listNSX(){
+        Query query = session.createQuery("from NSX ");
+        return query.getResultList();
+    }
+
+    public List<Size> listSize(){
+        Query query = session.createQuery("from Size ");
+        return query.getResultList();
+    }
+
+    public List<MauSac> listMS(){
+        Query query = session.createQuery("from MauSac ");
+        return query.getResultList();
+    }
+    public List<ChatLieu> listCL(){
+        Query query = session.createQuery("from ChatLieu ");
+        return query.getResultList();
+    }
+
+
     public Boolean them(ChiTietSanPham ctsp){
-        Transaction transaction = null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             transaction = session.beginTransaction();
 
             session.saveOrUpdate(ctsp);
@@ -53,8 +77,7 @@ public class CTSPRepository {
     }
 
     public Boolean sua(ChiTietSanPham ctsp){
-        Transaction transaction = null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             transaction = session.beginTransaction();
 
             session.update(ctsp);
@@ -69,8 +92,7 @@ public class CTSPRepository {
     }
 
     public Boolean xoa(ChiTietSanPham ctsp){
-        Transaction transaction = null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             transaction = session.beginTransaction();
 
             session.delete(ctsp);

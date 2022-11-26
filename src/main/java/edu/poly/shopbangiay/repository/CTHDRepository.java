@@ -10,14 +10,15 @@ import java.util.List;
 
 public class CTHDRepository {
 
+    Session session = Hibernate.getFACTORY().openSession();
+    Transaction transaction = null;
+
     public List<ChiTietHoaDon> getList() {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChiTietHoaDon ");
         return query.getResultList();
     }
 
     public List<ChiTietHoaDon> timKiem(String ma) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChiTietHoaDon cthd where cthd.hoaDon.ma like: maHD or cthd.chiTietSanPham.sanPham.ma like: maSP");
         query.setParameter("maHD", "%" + ma + "%");
         query.setParameter("maSP", "%" + ma + "%");
@@ -26,7 +27,7 @@ public class CTHDRepository {
 
     public ChiTietHoaDon getCTHD(Integer idHD, Integer idCTSP) {
         ChiTietHoaDon cthd = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("select cthd from ChiTietHoaDon cthd where cthd.hoaDon.id =: idHD and cthd.chiTietSanPham.id =: idCTSP ");
             query.setParameter("idHD", idHD);
             query.setParameter("idCTSP", idCTSP);
@@ -36,8 +37,14 @@ public class CTHDRepository {
         return cthd;
     }
 
+    public ChiTietHoaDon getByMaHD(String ma) {
+        Query query = session.createQuery("from ChiTietHoaDon cthd where cthd.hoaDon.ma =: ma");
+        query.setParameter("ma", ma);
+        return (ChiTietHoaDon) query.getSingleResult();
+    }
+
+
     public List<ChiTietHoaDon> getCTHDByMaHD(String ma) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("select cthd from ChiTietHoaDon cthd where cthd.hoaDon.ma = : ma");
         query.setParameter("ma", ma);
         return query.getResultList();
@@ -45,8 +52,7 @@ public class CTHDRepository {
 
 
     public Boolean them(ChiTietHoaDon cthd) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.save(cthd);
@@ -61,8 +67,7 @@ public class CTHDRepository {
     }
 
     public Boolean sua(ChiTietHoaDon cthd) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.update(cthd);
@@ -77,8 +82,7 @@ public class CTHDRepository {
     }
 
     public Boolean xoa(ChiTietHoaDon cthd) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.delete(cthd);

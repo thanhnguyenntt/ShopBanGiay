@@ -10,21 +10,22 @@ import java.util.List;
 
 public class ChatLieuRepository {
 
+    Session session = Hibernate.getFACTORY().openSession();
+    Transaction transaction= null;
+
     public List<ChatLieu> getList(){
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChatLieu ");
         return query.getResultList();
     }
 
     public List<ChatLieu> timKiem(String ten){
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from ChatLieu where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public ChatLieu getCLByMa(String ma){
-        try (Session session = Hibernate.getFACTORY().openSession()){
+        try{
             Query query = session.createQuery("from ChatLieu where ma =: ma");
             query.setParameter("ma", ma);
             return (ChatLieu) query.getSingleResult();
@@ -34,8 +35,8 @@ public class ChatLieuRepository {
     }
 
     public Boolean them(ChatLieu chatLieu){
-        Transaction transaction= null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+
+        try{
             transaction = session.beginTransaction();
 
             session.save(chatLieu);
@@ -50,8 +51,7 @@ public class ChatLieuRepository {
     }
 
     public Boolean sua(ChatLieu chatLieu){
-        Transaction transaction= null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             transaction = session.beginTransaction();
 
             session.update(chatLieu);
@@ -66,8 +66,7 @@ public class ChatLieuRepository {
     }
 
     public Boolean xoa(ChatLieu chatLieu){
-        Transaction transaction= null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             transaction = session.beginTransaction();
 
             session.delete(chatLieu);

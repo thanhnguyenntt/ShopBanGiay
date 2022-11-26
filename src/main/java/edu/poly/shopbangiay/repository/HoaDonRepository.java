@@ -10,21 +10,22 @@ import java.util.List;
 
 public class HoaDonRepository {
 
+    Session session = Hibernate.getFACTORY().openSession();
+    Transaction transaction = null;
+
     public List<HoaDon> getList() {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from HoaDon ");
         return query.getResultList();
     }
 
     public List<HoaDon> timKiem(String ma) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from HoaDon where ma like: ma");
         query.setParameter("ma", "%" + ma + "%");
         return query.getResultList();
     }
 
     public HoaDon getHDByMa(String ma){
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             Query query = session.createQuery("from HoaDon where ma=: ma");
             query.setParameter("ma", ma);
             return (HoaDon) query.getSingleResult();
@@ -34,8 +35,7 @@ public class HoaDonRepository {
     }
 
     public Boolean them(HoaDon hoaDon) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.save(hoaDon);
@@ -50,8 +50,7 @@ public class HoaDonRepository {
     }
 
     public Boolean sua(HoaDon hoaDon) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.update(hoaDon);
@@ -66,8 +65,7 @@ public class HoaDonRepository {
     }
 
     public Boolean xoa(HoaDon hoaDon) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.delete(hoaDon);

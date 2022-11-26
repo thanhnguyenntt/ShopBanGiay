@@ -458,6 +458,11 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         txtTimSP.setLabelText("Tìm kiếm");
+        txtTimSP.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimSPCaretUpdate(evt);
+            }
+        });
 
         tblSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -584,71 +589,74 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                         }
 
                         loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
-
+                        txtTongTien.setText(tongTien().toString());
                         ctsp.setSoLuong(ctsp.getSoLuong() - Integer.parseInt(input));
                         ctspService.sua(ctsp);
                     }
                 }
             }
+
         }
-
         loadSP(ctspService.getList());
-
         txtTongTien.setText(tongTien().toString());
-
+        
     }//GEN-LAST:event_tblSPMouseClicked
 
     private void tblGHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGHMouseClicked
         // TODO add your handling code here:
-        int rowGH = tblGH.getSelectedRow();
-        if (rowGH == -1) {
-            JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
-            return;
-        }
-        String input = JOptionPane.showInputDialog("Nhập lại số lượng sản phẩm");
+
+        String inputString = JOptionPane.showInputDialog("Nhập lại số lượng sản phẩm");
+        
         try {
-            Integer.parseInt(input);
+            Integer.parseInt(inputString);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nhập lại");
             return;
         }
-
-        if (Integer.parseInt(input) < 0) {
+        
+        Integer intput = Integer.parseInt(inputString);
+        
+        if (intput < 0) {
             JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
             return;
         }
 
-        ChiTietHoaDon cthd = cthdService.getList().get(rowGH);
-        if (Integer.parseInt(input) == cthd.getSoLuong()) {
+        int rowGH = tblGH.getSelectedRow();
+        ChiTietHoaDon cthd = cthdService.getCTHDByMaHD(txtMaHD.getText()).get(rowGH);
+        if (intput == cthd.getSoLuong()) {
             return;
         }
-        int soLuongSP = cthd.getSoLuong();
 
-        ChiTietSanPham ctsp = ctspService.getCTSPByMaSP(tblGH.getValueAt(rowGH, 1).toString());
+        ChiTietSanPham ctsp = cthd.getChiTietSanPham();
         if (ctsp.getSoLuong() == 0) {
             JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng");
             return;
         }
-        ctsp.setSoLuong(ctsp.getSoLuong() + soLuongSP);
+//        ctsp.setSoLuong(ctsp.getSoLuong() + soLuongSP);
 
-        if (Integer.parseInt(input) == 0) {
+
+        if (intput == 0) {
+            ctsp.setSoLuong(ctsp.getSoLuong() + intput);
+            ctspService.sua(ctsp);
             cthdService.xoa(cthd);
-            ctsp.setSoLuong(ctsp.getSoLuong() + Integer.parseInt(input));
+//            loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
+        }
+        int soLuongSP = cthd.getSoLuong();
+        if (intput > 0) {
+            if (intput < cthd.getSoLuong()) {
+                ctsp.setSoLuong(ctsp.getSoLuong() + (soLuongSP - intput));
+            } else {
+                ctsp.setSoLuong(ctsp.getSoLuong() - (soLuongSP - intput));
+            }
+            cthd.setSoLuong(intput);
+            cthdService.sua(cthd);
+            loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
             ctspService.sua(ctsp);
 
-        }
-        if (Integer.parseInt(input) > 0) {
-            cthd.setSoLuong(Integer.parseInt(input));
-            cthdService.sua(cthd);
-            if (Integer.parseInt(input) < cthd.getSoLuong()) {
-                ctsp.setSoLuong(ctsp.getSoLuong() + Integer.parseInt(input));
-            } else {
-                ctsp.setSoLuong(ctsp.getSoLuong() - Integer.parseInt(input));
-            }
-            ctspService.sua(ctsp);
         }
         loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
         loadSP(ctspService.getList());
+        txtTongTien.setText(tongTien().toString());
     }//GEN-LAST:event_tblGHMouseClicked
 
     private void tblHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDMouseClicked
@@ -656,8 +664,8 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         int row = tblHD.getSelectedRow();
         txtMaHD.setText(tblHD.getValueAt(row, 1).toString());
 
-        txtTongTien.setText(tongTien().toString());
         loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
+        txtTongTien.setText(tongTien().toString());
     }//GEN-LAST:event_tblHDMouseClicked
 
     private void btnThemHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemHDActionPerformed
@@ -705,9 +713,17 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 
     private void txtTongTienCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTongTienCaretUpdate
         // TODO add your handling code here:
-//        txtThanhTien.setText(String.valueOf(Float.parseFloat(txtTongTien.getText()) - Float.parseFloat(txtGiamGia.getText())));
+        txtThanhTien.setText(txtTongTien.getText());
 
     }//GEN-LAST:event_txtTongTienCaretUpdate
+
+    private void txtTimSPCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimSPCaretUpdate
+        // TODO add your handling code here:
+        String timSP = txtTimSP.getText();
+        List<ChiTietSanPham> list = ctspService.timKiem(timSP);
+        loadSP(list);
+
+    }//GEN-LAST:event_txtTimSPCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -65,20 +65,20 @@ public class UpdateSPUI extends javax.swing.JDialog {
     }
 
     public void loadUpdate() {
-        ChiTietSanPham chiTietSanPham = SanPhamUI.chiTietSanPham;
+        ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
         txtMaSP.setText(chiTietSanPham.getSanPham().getMa());
         txtTenSP.setText(chiTietSanPham.getSanPham().getTen());
         txtMaVach.setText("");
-        txtSoLuong.setText(SanPhamUI.chiTietSanPham.getSoLuong().toString());
-        txtGiaNhap.setText(SanPhamUI.chiTietSanPham.getGiaNhap().toString());
-        txtGiaBan.setText(SanPhamUI.chiTietSanPham.getGiaBan().toString());
+        txtSoLuong.setText(chiTietSanPham.getSoLuong().toString());
+        txtGiaNhap.setText(chiTietSanPham.getGiaNhap().toString());
+        txtGiaBan.setText(chiTietSanPham.getGiaBan().toString());
         cbxLoai.setSelectedItem(chiTietSanPham.getLoai());
         cbxMauSac.setSelectedItem(chiTietSanPham.getMauSac());
         cbxSize.setSelectedItem(chiTietSanPham.getSize());
         cbxChatLieu.setSelectedItem(chiTietSanPham.getChatLieu());
         cbxNSX.setSelectedItem(chiTietSanPham.getNsx());
-        txtMoTa.setText(SanPhamUI.chiTietSanPham.getMoTa());
-        if (SanPhamUI.chiTietSanPham.getTinhTrang().toString().equalsIgnoreCase("True")) {
+        txtMoTa.setText(chiTietSanPham.getMoTa());
+        if (chiTietSanPham.getTinhTrang().toString().equalsIgnoreCase("True")) {
             rdoOnl.setSelected(true);
         } else {
             rdoOff.setSelected(true);

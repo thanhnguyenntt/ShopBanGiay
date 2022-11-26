@@ -10,14 +10,16 @@ import java.util.List;
 
 public class SanPhamRepository {
 
+    Session session = Hibernate.getFACTORY().openSession();
+    Transaction transaction = null;
+
     public List<SanPham> getList() {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from SanPham ");
         return query.getResultList();
     }
 
     public SanPham getSPByMa(String ma) {
-        try (Session session = Hibernate.getFACTORY().openSession();) {
+        try{
             Query query = session.createQuery("from SanPham where ma =: ma");
             query.setParameter("ma", ma);
             return (SanPham) query.getSingleResult();
@@ -27,29 +29,25 @@ public class SanPhamRepository {
     }
 
     public SanPham getOne(String ten) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from SanPham where ten =: ten");
         query.setParameter("ten", ten);
         return (SanPham) query.getSingleResult();
     }
 
     public List<SanPham> timKiem(String ma) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from SanPham where ma like: ma");
         query.setParameter("ma", "%" + ma + "%");
         return query.getResultList();
     }
 
     public String getID(String ma) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("select sp.id from SanPham sp where sp.ma =: ma");
         query.setParameter("ma", ma);
         return (String) query.getSingleResult();
     }
 
     public Boolean them(SanPham sanPham) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.saveOrUpdate(sanPham);
@@ -63,8 +61,7 @@ public class SanPhamRepository {
     }
 
     public Boolean sua(SanPham sanPham) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.update(sanPham);
@@ -78,8 +75,7 @@ public class SanPhamRepository {
     }
 
     public Boolean xoa(SanPham sanPham) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             transaction = session.beginTransaction();
 
             session.delete(sanPham);

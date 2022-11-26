@@ -1,6 +1,6 @@
 package edu.poly.shopbangiay.service.impl;
 
-import edu.poly.shopbangiay.model.ChiTietSanPham;
+import edu.poly.shopbangiay.model.*;
 import edu.poly.shopbangiay.repository.CTSPRepository;
 import edu.poly.shopbangiay.service.CTSPService;
 import edu.poly.shopbangiay.viewModel.VMCTSP;
@@ -30,6 +30,31 @@ public class CTSPServiceImpl implements CTSPService {
     @Override
     public List<ChiTietSanPham> getList() {
         return ctspRepository.getList();
+    }
+
+    @Override
+    public List<Loai> listLoai() {
+        return ctspRepository.listLoai();
+    }
+
+    @Override
+    public List<NSX> listNSX() {
+        return ctspRepository.listNSX();
+    }
+
+    @Override
+    public List<Size> listSize() {
+        return ctspRepository.listSize();
+    }
+
+    @Override
+    public List<MauSac> listMS() {
+        return ctspRepository.listMS();
+    }
+
+    @Override
+    public List<ChatLieu> listCL() {
+        return ctspRepository.listCL();
     }
 
     @Override

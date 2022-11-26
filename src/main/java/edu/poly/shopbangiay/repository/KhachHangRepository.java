@@ -10,23 +10,22 @@ import java.util.List;
 
 public class KhachHangRepository {
 
+    Session session = Hibernate.getFACTORY().openSession();
+    Transaction transaction = null;
 
     public List<KhachHang> getList() {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from KhachHang ");
         return query.getResultList();
     }
 
     public List<KhachHang> timKiem(String ten) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from KhachHang where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public Boolean them(KhachHang khachHang) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.save(khachHang);
@@ -41,8 +40,7 @@ public class KhachHangRepository {
     }
 
     public Boolean sua(KhachHang khachHang) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.update(khachHang);
@@ -57,8 +55,7 @@ public class KhachHangRepository {
     }
 
     public Boolean xoa(KhachHang khachHang) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.delete(khachHang);

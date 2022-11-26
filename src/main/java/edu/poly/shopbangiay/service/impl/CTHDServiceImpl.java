@@ -25,6 +25,11 @@ public class CTHDServiceImpl implements CTHDService {
     }
 
     @Override
+    public ChiTietHoaDon getByMaHD(String ma) {
+        return cthdRepository.getByMaHD(ma);
+    }
+
+    @Override
     public List<ChiTietHoaDon> getCTHDByMaHD(String maHD) {
         return cthdRepository.getCTHDByMaHD(maHD);
     }

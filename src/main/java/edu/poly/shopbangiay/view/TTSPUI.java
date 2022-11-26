@@ -28,19 +28,20 @@ public class TTSPUI extends javax.swing.JDialog {
     }
 
     public void loadData() {
-        lbTenSP.setText(SanPhamUI.chiTietSanPham.getSanPham().getTen());
-        txtMaSP.setText(SanPhamUI.chiTietSanPham.getSanPham().getMa());
+        ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+        lbTenSP.setText(chiTietSanPham.getSanPham().getTen());
+        txtMaSP.setText(chiTietSanPham.getSanPham().getMa());
         txtMaVach.setText("");
-        txtSoLuong.setText(SanPhamUI.chiTietSanPham.getSoLuong().toString());
-        txtGiaNhap.setText(SanPhamUI.chiTietSanPham.getGiaNhap().toString());
-        txtGiaBan.setText(SanPhamUI.chiTietSanPham.getGiaBan().toString());
-        txtLoai.setText(SanPhamUI.chiTietSanPham.getLoai().getTen());
-        txtMauSac.setText(SanPhamUI.chiTietSanPham.getMauSac().getTen());
-        txtSize.setText(SanPhamUI.chiTietSanPham.getSize().getSoSize().toString());
-        txtChatLieu.setText(SanPhamUI.chiTietSanPham.getChatLieu().getTen());
-        txtNSX.setText(SanPhamUI.chiTietSanPham.getNsx().getTen());
-        txtMoTa.setText(SanPhamUI.chiTietSanPham.getMoTa());
-        txtTinhTrang.setText(SanPhamUI.chiTietSanPham.getTinhTrang() == true ? "Đang kinh doanh" : "Ngừng kinh doanh");
+        txtSoLuong.setText(chiTietSanPham.getSoLuong().toString());
+        txtGiaNhap.setText(chiTietSanPham.getGiaNhap().toString());
+        txtGiaBan.setText(chiTietSanPham.getGiaBan().toString());
+        txtLoai.setText(chiTietSanPham.getLoai().getTen());
+        txtMauSac.setText(chiTietSanPham.getMauSac().getTen());
+        txtSize.setText(chiTietSanPham.getSize().getSoSize().toString());
+        txtChatLieu.setText(chiTietSanPham.getChatLieu().getTen());
+        txtNSX.setText(chiTietSanPham.getNsx().getTen());
+        txtMoTa.setText(chiTietSanPham.getMoTa());
+        txtTinhTrang.setText(chiTietSanPham.getTinhTrang() == true ? "Đang kinh doanh" : "Ngừng kinh doanh");
     }
 
     /**

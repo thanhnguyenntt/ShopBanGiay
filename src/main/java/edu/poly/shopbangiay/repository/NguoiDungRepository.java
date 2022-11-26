@@ -10,23 +10,22 @@ import java.util.List;
 
 public class NguoiDungRepository {
 
-
+    Session session = Hibernate.getFACTORY().openSession();
+    Transaction transaction = null;
 
     public List<NguoiDung> getList(){
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from NguoiDung ");
         return query.getResultList();
     }
 
     public List<NguoiDung> timKiem(String ten){
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from NguoiDung where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public NguoiDung getNDByMa(String ma){
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             Query query = session.createQuery("from NguoiDung where ma =: ma");
             query.setParameter("ma", ma);
             return (NguoiDung) query.getSingleResult();
@@ -36,8 +35,7 @@ public class NguoiDungRepository {
     }
 
     public Boolean them(NguoiDung nguoiDung){
-        Transaction transaction = null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             transaction = session.beginTransaction();
 
             session.save(nguoiDung);
@@ -52,8 +50,7 @@ public class NguoiDungRepository {
     }
 
     public Boolean sua(NguoiDung nguoiDung){
-        Transaction transaction = null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             transaction = session.beginTransaction();
 
             session.update(nguoiDung);
@@ -68,8 +65,7 @@ public class NguoiDungRepository {
     }
 
     public Boolean xoa(NguoiDung nguoiDung){
-        Transaction transaction = null;
-        try(Session session = Hibernate.getFACTORY().openSession()){
+        try{
             transaction = session.beginTransaction();
 
             session.delete(nguoiDung);

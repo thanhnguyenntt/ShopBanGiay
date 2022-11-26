@@ -10,23 +10,22 @@ import java.util.List;
 
 public class LoaiRepository {
 
+    Session session = Hibernate.getFACTORY().openSession();
     Transaction transaction;
 
     public List<Loai> getList() {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from Loai ");
         return query.getResultList();
     }
 
     public List<Loai> timKiem(String ten) {
-        Session session = Hibernate.getFACTORY().openSession();
         Query query = session.createQuery("from Loai where ten like: ten");
         query.setParameter("ten", "%" + ten + "%");
         return query.getResultList();
     }
 
     public Loai getLoaiByMa(String ma) {
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("from Loai where ma =: ma");
             query.setParameter("ma", ma);
             return (Loai) query.getSingleResult();
@@ -36,8 +35,7 @@ public class LoaiRepository {
     }
 
     public Boolean them(Loai loai) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.save(loai);
@@ -52,8 +50,7 @@ public class LoaiRepository {
     }
 
     public Boolean sua(Loai loai) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.update(loai);
@@ -68,8 +65,7 @@ public class LoaiRepository {
     }
 
     public Boolean xoa(Loai loai) {
-        Transaction transaction = null;
-        try (Session session = Hibernate.getFACTORY().openSession()) {
+        try {
             transaction = session.beginTransaction();
 
             session.delete(loai);
