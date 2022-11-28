@@ -14,12 +14,12 @@ public class HoaDonRepository {
     Transaction transaction = null;
 
     public List<HoaDon> getList() {
-        Query query = session.createQuery("from HoaDon ");
+        Query query = session.createQuery("from HoaDon order by ngayTao desc");
         return query.getResultList();
     }
 
     public List<HoaDon> timKiem(String ma) {
-        Query query = session.createQuery("from HoaDon where ma like: ma");
+        Query query = session.createQuery("from HoaDon where ma like: ma order by ngayTao desc");
         query.setParameter("ma", "%" + ma + "%");
         return query.getResultList();
     }

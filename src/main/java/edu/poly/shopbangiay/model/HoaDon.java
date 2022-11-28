@@ -39,10 +39,15 @@ public class HoaDon implements Serializable {
     @Column
     private Date ngayTao;
     @Column
+    private Float tongTien;
+    @Column
+    private Float thanhTien;
+    @Column
     private Date ngayTT;
     @Column
     private Boolean tinhTrang;
 
     @OneToMany(mappedBy = "hoaDon", fetch = FetchType.LAZY)
     private List<ChiTietHoaDon> chiTietHoaDonList;
+
 }

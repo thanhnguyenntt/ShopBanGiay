@@ -24,6 +24,12 @@ public class KhachHangRepository {
         return query.getResultList();
     }
 
+    public KhachHang getKHByMa(String ma){
+        Query query = session.createQuery("from KhachHang where ma =: ma");
+        query.setParameter("ma", ma);
+        return (KhachHang) query.getSingleResult();
+    }
+
     public Boolean them(KhachHang khachHang) {
         try {
             transaction = session.beginTransaction();

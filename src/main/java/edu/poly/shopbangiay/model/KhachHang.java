@@ -9,6 +9,7 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 @Getter
@@ -33,6 +34,8 @@ public class KhachHang implements Serializable {
     private Boolean gioiTinh;
 
     @Column
+    private Date ngaySinh;
+    @Column
     private String sdt;
 
     @Column
@@ -41,6 +44,9 @@ public class KhachHang implements Serializable {
 
     @Column
     private String email;
+
+    @Column
+    private String anh;
 
     @OneToMany(mappedBy = "khachHang", fetch = FetchType.LAZY)
     private List<HoaDon> hoaDonList;

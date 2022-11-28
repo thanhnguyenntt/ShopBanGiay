@@ -74,6 +74,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 
     }
 
+
     public void loadSP(List<ChiTietSanPham> list) {
         defaultTableModel = (DefaultTableModel) tblSP.getModel();
         defaultTableModel.setRowCount(0);
@@ -246,7 +247,6 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSP = new javax.swing.JTable();
         Cam = new javax.swing.JPanel();
-        btnOnCam = new edu.poly.shopbangiay.raven.button.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 102), 2, true));
@@ -254,6 +254,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
+        tblHD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tblHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -271,6 +272,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 
         tableScrollButton3.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
+        txtTimHD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTimHD.setLabelText("Tìm hóa đơn");
         txtTimHD.setLineColor(new java.awt.Color(153, 153, 153));
 
@@ -324,13 +326,16 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         });
 
         cbxKH.setToolTipText("");
+        cbxKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         txtMaHD.setEditable(false);
         txtMaHD.setBackground(new java.awt.Color(255, 255, 255));
+        txtMaHD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMaHD.setLabelText("Mã hóa đơn");
 
         txtTongTien.setEditable(false);
         txtTongTien.setBackground(new java.awt.Color(255, 255, 255));
+        txtTongTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTongTien.setLabelText("Tổng tiền");
         txtTongTien.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -339,14 +344,18 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         });
 
         txtGiamGia.setText("0.0");
+        txtGiamGia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtGiamGia.setLabelText("Giảm giá");
 
         btnThemVC.setText("+");
+        btnThemVC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         txtThanhTien.setEditable(false);
         txtThanhTien.setBackground(new java.awt.Color(255, 255, 255));
+        txtThanhTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtThanhTien.setLabelText("Thành tiền");
 
+        txtKhachTT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtKhachTT.setLabelText("Khách thanh toán");
         txtKhachTT.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -356,12 +365,14 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 
         txtTienThua.setEditable(false);
         txtTienThua.setBackground(new java.awt.Color(255, 255, 255));
+        txtTienThua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTienThua.setLabelText("Tiền thừa cho khách");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Khách hàng:");
 
         btnThemKH.setText("+");
+        btnThemKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -416,7 +427,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                 .addComponent(txtKhachTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnHuyHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -426,6 +437,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giỏ hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
+        tblGH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tblGH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -457,6 +469,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
+        txtTimSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTimSP.setLabelText("Tìm kiếm");
         txtTimSP.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -464,6 +477,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
             }
         });
 
+        tblSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tblSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -503,13 +517,6 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         Cam.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Webcam", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         Cam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnOnCam.setText("Mở Camera");
-        btnOnCam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOnCamActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -519,9 +526,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Cam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnOnCam, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))
+                        .addComponent(Cam, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -532,10 +537,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Cam, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnOnCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(Cam, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -688,16 +690,13 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         }
     }//GEN-LAST:event_txtKhachTTCaretUpdate
 
-    private void btnOnCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnCamActionPerformed
-        // TODO add your handling code here:
-        initWebcam(Cam);
-    }//GEN-LAST:event_btnOnCamActionPerformed
-
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
         if (checkTT()) {
             if (checkForm()) {
                 HoaDon hoaDon = hoaDonService.getHDByMa(txtMaHD.getText());
+                hoaDon.setTongTien(Float.parseFloat(txtTongTien.getText()));
+                hoaDon.setThanhTien(Float.parseFloat(txtThanhTien.getText()));
                 hoaDon.setTinhTrang(false);
                 hoaDonService.sua(hoaDon);
 
@@ -727,9 +726,8 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Cam;
+    public javax.swing.JPanel Cam;
     private edu.poly.shopbangiay.raven.button.Button btnHuyHD;
-    private edu.poly.shopbangiay.raven.button.Button btnOnCam;
     private edu.poly.shopbangiay.raven.button.Button btnThanhToan;
     private edu.poly.shopbangiay.raven.button.Button btnThemHD;
     private edu.poly.shopbangiay.raven.button.Button btnThemKH;

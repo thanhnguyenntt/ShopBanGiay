@@ -9,12 +9,20 @@ import edu.poly.shopbangiay.service.*;
 import edu.poly.shopbangiay.service.impl.*;
 import edu.poly.shopbangiay.viewModel.VMCTSP;
 import java.awt.Image;
-import java.io.File;
+import java.io.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import table.TableCustom;
 
 /**
@@ -562,12 +570,175 @@ public class SanPhamUI extends javax.swing.JPanel {
 
     private void btnNhapFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Đang phát triển =))");
+        List<ChiTietSanPham> list = new ArrayList<>();
+        JFileChooser chonFile = new JFileChooser("E:\\Code\\Java\\IdeaProjects\\ShopBanGiay");
+        chonFile.showOpenDialog(null);
+        File file = chonFile.getSelectedFile();
+        try{
+            FileInputStream fis = new FileInputStream(file);
+            Workbook workbook = new XSSFWorkbook(fis);
+            Sheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = sheet.iterator();
 
+            while (iterator.hasNext()) {
+                Row currentRow = iterator.next();
+                if (currentRow.getRowNum() == 0) {
+                    continue;
+                }
+                String maSP = currentRow.getCell(0).getStringCellValue();
+                String tenSP = currentRow.getCell(1).getStringCellValue();
+                String tenLoai = currentRow.getCell(2).getStringCellValue();
+                String tenNSX = currentRow.getCell(3).getStringCellValue();
+                String soSize = currentRow.getCell(4).getStringCellValue();
+                String tenMau = currentRow.getCell(5).getStringCellValue();
+                String tenCL = currentRow.getCell(6).getStringCellValue();
+                String soLuong = currentRow.getCell(7).getStringCellValue();
+                String giaNhap = currentRow.getCell(8).getStringCellValue();
+                String giaBan = currentRow.getCell(9).getStringCellValue();
+                String moTa = currentRow.getCell(10).getStringCellValue();
+                String hinhAnh = currentRow.getCell(11).getStringCellValue();
+                String maVach = currentRow.getCell(12).getStringCellValue();
+                String trangThai = currentRow.getCell(13).getStringCellValue();
+
+                SanPham sanPham = new SanPham();
+                sanPham.setMa(maSP);
+                sanPham.setTen(tenSP);
+
+                ChiTietSanPham ctsp = new ChiTietSanPham();
+                ctsp.setSanPham(sanPham);
+
+                Loai loai = loaiService.getList().get(cbxLoai.getSelectedIndex());
+                ctsp.setLoai(loai);
+
+                Size size = sizeService.getList().get(cbxSize.getSelectedIndex());
+                ctsp.setSize(size);
+
+                ChatLieu chatLieu = chatLieuService.getList().get(cbxCL.getSelectedIndex());
+                ctsp.setChatLieu(chatLieu);
+
+                MauSac mauSac = mauSacService.getList().get(cbxMS.getSelectedIndex());
+                ctsp.setMauSac(mauSac);
+
+                NSX nsx = nsxService.getList().get(cbxNSX.getSelectedIndex());
+                ctsp.setNsx(nsx);
+
+                ctsp.setMaVach(null);
+                ctsp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+                ctsp.setGiaNhap(Float.parseFloat(txtGiaNhap.getText()));
+                ctsp.setGiaBan(Float.parseFloat(txtGiaBan.getText()));
+                ctsp.setMoTa(txtMota.getText());
+            }
+        }catch (Exception e){
+
+        }
     }//GEN-LAST:event_btnNhapFileActionPerformed
 
     private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
         // TODO add your handling code here:
+        List<ChiTietSanPham> list = ctspService.getList();
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Sản phẩm");
+        int rowNum = 0;
+        Row titleRow = sheet.createRow(rowNum);
+
+        Cell maSPTT = titleRow.createCell(0);
+        maSPTT.setCellValue("Mã SP");
+
+        Cell tenSPTT = titleRow.createCell(1);
+        tenSPTT.setCellValue("Tên SP");
+
+        Cell loaiTT = titleRow.createCell(2);
+        loaiTT.setCellValue("Loại");
+
+        Cell NSXTT = titleRow.createCell(3);
+        NSXTT.setCellValue("Nhà sản xuất");
+
+        Cell sizeTT = titleRow.createCell(4);
+        sizeTT.setCellValue("Size");
+
+        Cell mauTT = titleRow.createCell(5);
+        mauTT.setCellValue("Màu sắc");
+
+        Cell chatLieuTT = titleRow.createCell(6);
+        chatLieuTT.setCellValue("Chất liệu");
+
+        Cell soLuongTT = titleRow.createCell(7);
+        soLuongTT.setCellValue("Số lượng");
+
+        Cell giaNhapTT = titleRow.createCell(8);
+        giaNhapTT.setCellValue("Giá nhập");
+
+        Cell giaBanTT = titleRow.createCell(9);
+        giaBanTT.setCellValue("Giá bán");
+
+        Cell moTaTT = titleRow.createCell(10);
+        moTaTT.setCellValue("Mô tả");
+
+        Cell hinhAnhTT = titleRow.createCell(11);
+        hinhAnhTT.setCellValue("Hình ảnh");
+
+        Cell maVachTT = titleRow.createCell(12);
+        maVachTT.setCellValue("Mã vạch");
+
+        Cell trangThaiTT = titleRow.createCell(13);
+        trangThaiTT.setCellValue("Trạng thái");
+
+        for (ChiTietSanPham ctsp : list) {
+            rowNum++;
+            Row row = sheet.createRow(rowNum);
+            Cell maSP = row.createCell(0);
+            maSP.setCellValue(ctsp.getSanPham().getMa());
+
+            Cell tenSP = row.createCell(1);
+            tenSP.setCellValue(ctsp.getSanPham().getTen());
+
+            Cell loai = row.createCell(2);
+            loai.setCellValue(ctsp.getLoai().getTen());
+
+            Cell NSX = row.createCell(3);
+            NSX.setCellValue(ctsp.getNsx().getTen());
+
+            Cell size = row.createCell(4);
+            size.setCellValue(ctsp.getSize().getSoSize());
+
+            Cell mau = row.createCell(5);
+            mau.setCellValue(ctsp.getMauSac().getTen());
+
+            Cell chatLieu = row.createCell(6);
+            chatLieu.setCellValue(ctsp.getChatLieu().getTen());
+
+            Cell soLuong = row.createCell(7);
+            soLuong.setCellValue(ctsp.getSoLuong());
+
+            Cell giaNhap = row.createCell(8);
+            giaNhap.setCellValue(ctsp.getGiaNhap());
+
+            Cell giaBan = row.createCell(9);
+            giaBan.setCellValue(ctsp.getGiaBan());
+
+            Cell moTa = row.createCell(10);
+            moTa.setCellValue(ctsp.getMoTa());
+
+            Cell hinhAnh = row.createCell(11);
+            hinhAnh.setCellValue(ctsp.getHinhAnh());
+
+            Cell maVach = row.createCell(12);
+            maVach.setCellValue(ctsp.getMaVach());
+
+            Cell trangThai = row.createCell(13);
+            trangThai.setCellValue(ctsp.getTinhTrang());
+        }
+
+        FileOutputStream fos;
+        try{
+            fos = new FileOutputStream("sanPham.xlsx");
+            workbook.write(fos);
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(this, "Ghi file thành công");
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
@@ -582,7 +753,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         dialog.setVisible(true);
     }//GEN-LAST:event_btnQLActionPerformed
 
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.  ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         int row = tblCTSP.getSelectedRow();
         ChiTietSanPham ctsp = ctspService.getList().get(row);

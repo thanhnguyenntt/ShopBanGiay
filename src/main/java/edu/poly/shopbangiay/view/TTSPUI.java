@@ -4,6 +4,7 @@
  */
 package edu.poly.shopbangiay.view;
 
+import edu.poly.shopbangiay.view.kcr.UpdateSPUI;
 import edu.poly.shopbangiay.model.ChiTietSanPham;
 import edu.poly.shopbangiay.service.CTSPService;
 import edu.poly.shopbangiay.service.impl.CTSPServiceImpl;

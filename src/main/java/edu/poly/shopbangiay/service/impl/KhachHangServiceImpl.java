@@ -15,8 +15,8 @@ public class KhachHangServiceImpl implements KhachHangService {
     }
 
     @Override
-    public KhachHang getOne(String ma) {
-        return null;
+    public KhachHang getKHByMa(String ma) {
+        return khachHangRepository.getKHByMa(ma);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface KhachHangService {
     List<KhachHang> getList();
-    KhachHang getOne(String ma);
+    KhachHang getKHByMa(String ma);
     List<KhachHang> timKiem(String ten);
     Boolean them(KhachHang khachHang);
     Boolean sua(KhachHang khachHang);

@@ -4,6 +4,7 @@
  */
 package edu.poly.shopbangiay.view;
 
+import javax.swing.*;
 import java.awt.CardLayout;
 import java.awt.Color;
 
@@ -20,7 +21,7 @@ public class Main extends javax.swing.JFrame {
     CardLayout cardLayout;
     public Main() {
         initComponents();
-        
+        new BanHangUI().initWebcam(banHangUI1.Cam);
         cardLayout = (CardLayout) jPanel3.getLayout();
         cardLayout.show(jPanel3, "TrangChu");
         
@@ -73,9 +74,9 @@ public class Main extends javax.swing.JFrame {
         jPanel16 = new javax.swing.JPanel();
         nhanVienUI1 = new edu.poly.shopbangiay.view.NhanVienUI();
         jPanel17 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
+        hoaDonUI1 = new edu.poly.shopbangiay.view.HoaDonUI();
         jPanel20 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
+        khachHangUI1 = new edu.poly.shopbangiay.view.KhachHangUI();
         jPanel18 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
 
@@ -502,29 +503,15 @@ public class Main extends javax.swing.JFrame {
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 153), 2, true));
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 0, 153));
-        jLabel16.setText("Quản lý hóa đơn");
-
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1308, Short.MAX_VALUE)
-            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel17Layout.createSequentialGroup()
-                    .addGap(338, 338, 338)
-                    .addComponent(jLabel16)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(hoaDonUI1, javax.swing.GroupLayout.DEFAULT_SIZE, 1332, Short.MAX_VALUE)
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 911, Short.MAX_VALUE)
-            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel17Layout.createSequentialGroup()
-                    .addGap(385, 385, 385)
-                    .addComponent(jLabel16)
-                    .addContainerGap(462, Short.MAX_VALUE)))
+            .addComponent(hoaDonUI1, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
         );
 
         jPanel3.add(jPanel17, "QLHD");
@@ -532,29 +519,15 @@ public class Main extends javax.swing.JFrame {
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 153), 2, true));
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 0, 153));
-        jLabel18.setText("Khách hàng");
-
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1308, Short.MAX_VALUE)
-            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel20Layout.createSequentialGroup()
-                    .addGap(338, 338, 338)
-                    .addComponent(jLabel18)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(khachHangUI1, javax.swing.GroupLayout.DEFAULT_SIZE, 1332, Short.MAX_VALUE)
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 911, Short.MAX_VALUE)
-            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel20Layout.createSequentialGroup()
-                    .addGap(385, 385, 385)
-                    .addComponent(jLabel18)
-                    .addContainerGap(462, Short.MAX_VALUE)))
+            .addComponent(khachHangUI1, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
         );
 
         jPanel3.add(jPanel20, "KhachHang");
@@ -697,14 +670,13 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private edu.poly.shopbangiay.view.BanHangUI banHangUI1;
+    private edu.poly.shopbangiay.view.HoaDonUI hoaDonUI1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -733,6 +705,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private edu.poly.shopbangiay.view.KhachHangUI khachHangUI1;
     private edu.poly.shopbangiay.view.NhanVienUI nhanVienUI1;
     private edu.poly.shopbangiay.view.SanPhamUI sanPhamUI1;
     // End of variables declaration//GEN-END:variables
