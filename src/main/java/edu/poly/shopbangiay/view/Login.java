@@ -5,8 +5,11 @@
 package edu.poly.shopbangiay.view;
 
 
+import edu.poly.shopbangiay.model.NguoiDung;
 import edu.poly.shopbangiay.service.NguoiDungService;
 import edu.poly.shopbangiay.service.impl.NguoiDungServiceImpl;
+
+import java.util.List;
 
 /**
  *
@@ -25,6 +28,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     public boolean check(){
+        List<NguoiDung> listNguoiDung = nguoiDungService.getList();
         if(txtUser.getText().isEmpty()){
             lbErrorUser.setText("Vui lòng nhập tài khoản !");
             return false;
@@ -37,7 +41,7 @@ public class Login extends javax.swing.JFrame {
         }else{
             lbErrorPass.setText("");
         }
-        if(txtUser.getText().equalsIgnoreCase("Quang") && txtPass.getText().equals("alo")){
+        if(txtUser.getText().equalsIgnoreCase("Quang") && txtPass.getText().equals("abc")){
             lbErrorPass.setText("");
         }else{
             lbErrorPass.setText("Vui lòng kiểm tra lại tài khoản hoặc mật khẩu");

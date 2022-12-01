@@ -1,6 +1,8 @@
 package edu.poly.shopbangiay.repository;
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
+import edu.poly.shopbangiay.model.ChucVu;
+import edu.poly.shopbangiay.model.Loai;
 import edu.poly.shopbangiay.model.NguoiDung;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -32,6 +34,11 @@ public class NguoiDungRepository {
         }catch (Exception e){
             return null;
         }
+    }
+
+    public List<ChucVu> listCV(){
+        Query query = session.createQuery("from ChucVu ");
+        return query.getResultList();
     }
 
     public Boolean them(NguoiDung nguoiDung){

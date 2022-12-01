@@ -1,5 +1,6 @@
 package edu.poly.shopbangiay.service.impl;
 
+import edu.poly.shopbangiay.model.ChucVu;
 import edu.poly.shopbangiay.model.NguoiDung;
 import edu.poly.shopbangiay.repository.NguoiDungRepository;
 import edu.poly.shopbangiay.service.NguoiDungService;
@@ -17,6 +18,11 @@ public class NguoiDungServiceImpl implements NguoiDungService {
     @Override
     public NguoiDung getNDByMa(String ma) {
         return nguoiDungRepository.getNDByMa(ma);
+    }
+
+    @Override
+    public List<ChucVu> listCV() {
+        return nguoiDungRepository.listCV();
     }
 
     @Override

@@ -432,7 +432,6 @@ public class UpdateSPUI extends javax.swing.JDialog {
         NSX nsx = nsxService.getList().get(cbxNSX.getSelectedIndex());
         ctsp.setNsx(nsx);
 
-        ctsp.setMaVach(null);
         ctsp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         ctsp.setGiaNhap(Float.parseFloat(txtGiaNhap.getText()));
         ctsp.setGiaBan(Float.parseFloat(txtGiaBan.getText()));

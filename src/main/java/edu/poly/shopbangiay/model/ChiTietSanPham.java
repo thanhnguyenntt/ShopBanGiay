@@ -50,8 +50,6 @@ public class ChiTietSanPham implements Serializable {
     @Column
     private Float giaBan;
     @Column
-    private String maVach;
-    @Column
     private String hinhAnh;
     @Column
     private Boolean tinhTrang;

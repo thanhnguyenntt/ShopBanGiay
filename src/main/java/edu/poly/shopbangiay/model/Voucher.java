@@ -33,9 +33,6 @@ public class Voucher implements Serializable {
     private Integer phanTramGiam;
 
     @Column
-    private Integer soLuong;
-
-    @Column
     private Date ngayTao;
 
     @Column
@@ -48,8 +45,13 @@ public class Voucher implements Serializable {
     private String moTa;
 
     @Column
-    private String trangThai;
+    private Boolean trangThai;
 
     @OneToMany(mappedBy = "voucher", fetch = FetchType.LAZY)
     private List<HoaDon> hoaDonList;
+
+    @Override
+    public String toString() {
+        return ten;
+    }
 }

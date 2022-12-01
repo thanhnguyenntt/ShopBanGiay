@@ -123,6 +123,8 @@
                           <Group type="102" attributes="0">
                               <Component id="txtTim" min="-2" pref="330" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnGenQR" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnThem" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnSua" min="-2" pref="80" max="-2" attributes="0"/>
@@ -189,6 +191,7 @@
                           <Component id="btnSua" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                           <Component id="btnXoa" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                           <Component id="btnQL" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                          <Component id="btnGenQR" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -489,6 +492,20 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXuatFileActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="edu.poly.shopbangiay.raven.button.Button" name="btnGenQR">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#x1ea1;o m&#xe3; QR"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenQRActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

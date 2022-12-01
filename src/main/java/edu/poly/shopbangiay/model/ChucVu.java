@@ -12,7 +12,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 
 @Entity
 public class ChucVu implements Serializable {
@@ -29,4 +28,10 @@ public class ChucVu implements Serializable {
 
     @OneToMany(mappedBy = "chucVu", fetch = FetchType.LAZY)
     private List<NguoiDung> nguoiDungList;
+
+    @Override
+    public String toString() {
+        return ten;
+
+    }
 }
