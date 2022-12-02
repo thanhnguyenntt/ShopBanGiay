@@ -26,16 +26,16 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Override
     public Boolean them(KhachHang khachHang) {
-        return null;
+        return khachHangRepository.them(khachHang);
     }
 
     @Override
     public Boolean sua(KhachHang khachHang) {
-        return null;
+        return khachHangRepository.sua(khachHang);
     }
 
     @Override
     public Boolean xoa(KhachHang khachHang) {
-        return null;
+        return khachHangRepository.xoa(khachHang);
     }
 }

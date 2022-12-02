@@ -54,7 +54,7 @@ public class SanPhamUI extends javax.swing.JPanel {
     private ChatLieuService chatLieuService = new ChatLieuServiceImpl();
     private MauSacService mauSacService = new MauSacServiceImpl();
     private NSXService nsxService = new NSXServiceImpl();
-
+    String url = null;
     public SanPhamUI() {
         initComponents();
         groupTT();
@@ -554,7 +554,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         NSX nsx = nsxService.getList().get(cbxNSX.getSelectedIndex());
         ctsp.setNsx(nsx);
 
-        ctsp.setHinhAnh(lbAnh.getText());
+        ctsp.setHinhAnh(url);
         ctsp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         ctsp.setGiaNhap(Float.parseFloat(txtGiaNhap.getText()));
         ctsp.setGiaBan(Float.parseFloat(txtGiaBan.getText()));
@@ -594,16 +594,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         } else {
             rdoOff.setSelected(true);
         }
-//        String url = "/image/" + ctsp.getHinhAnh();
-//        ImageIcon imageIcon = new ImageIcon(url);
-//        lbAnh.setIcon(imageIcon);
-        try {
-            BufferedImage url = ImageIO.read(new File("/image/" + ctsp.getHinhAnh()));
-            ImageIcon img = new ImageIcon();
-//            System.out.println(anh.getName());
-            lbAnh.setText(ctsp.getHinhAnh());
-        } catch (Exception e) {
-        }
+        lbAnh.setIcon(ResizeImage(new ImageIcon("image/SP/" + ctsp.getHinhAnh()).toString()));
 
     }//GEN-LAST:event_tblCTSPMouseClicked
 
@@ -636,8 +627,7 @@ public class SanPhamUI extends javax.swing.JPanel {
                 String giaBan = currentRow.getCell(9).getStringCellValue();
                 String moTa = currentRow.getCell(10).getStringCellValue();
                 String hinhAnh = currentRow.getCell(11).getStringCellValue();
-                String maVach = currentRow.getCell(12).getStringCellValue();
-                String trangThai = currentRow.getCell(13).getStringCellValue();
+                String trangThai = currentRow.getCell(12).getStringCellValue();
 
                 SanPham sanPham = new SanPham();
                 sanPham.setMa(maSP);
@@ -646,25 +636,35 @@ public class SanPhamUI extends javax.swing.JPanel {
                 ChiTietSanPham ctsp = new ChiTietSanPham();
                 ctsp.setSanPham(sanPham);
 
-                Loai loai = loaiService.getList().get(cbxLoai.getSelectedIndex());
+                Loai loai = new Loai();
+                loai.setTen(tenLoai);
                 ctsp.setLoai(loai);
 
-                Size size = sizeService.getList().get(cbxSize.getSelectedIndex());
+                Size size = new Size();
+                size.setSoSize(Integer.parseInt(soSize));
                 ctsp.setSize(size);
 
-                ChatLieu chatLieu = chatLieuService.getList().get(cbxCL.getSelectedIndex());
+                ChatLieu chatLieu = new ChatLieu();
+                chatLieu.setTen(tenCL);
                 ctsp.setChatLieu(chatLieu);
 
-                MauSac mauSac = mauSacService.getList().get(cbxMS.getSelectedIndex());
+                MauSac mauSac = new MauSac();
+                mauSac.setTen(tenMau);
                 ctsp.setMauSac(mauSac);
 
-                NSX nsx = nsxService.getList().get(cbxNSX.getSelectedIndex());
+                NSX nsx = new NSX();
+                nsx.setTen(tenNSX);
                 ctsp.setNsx(nsx);
 
-                ctsp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
-                ctsp.setGiaNhap(Float.parseFloat(txtGiaNhap.getText()));
-                ctsp.setGiaBan(Float.parseFloat(txtGiaBan.getText()));
-                ctsp.setMoTa(txtMota.getText());
+                ctsp.setSoLuong(Integer.parseInt(soLuong));
+                ctsp.setGiaNhap(Float.parseFloat(giaNhap));
+                ctsp.setGiaBan(Float.parseFloat(giaBan));
+                ctsp.setMoTa(moTa);
+                ctsp.setHinhAnh(hinhAnh);
+                ctsp.setTinhTrang(Boolean.parseBoolean(trangThai));
+
+                list.add(ctsp);
+                loadData(ctspService.getList());
             }
         } catch (Exception e) {
 
@@ -715,10 +715,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         Cell hinhAnhTT = titleRow.createCell(11);
         hinhAnhTT.setCellValue("Hình ảnh");
 
-        Cell maVachTT = titleRow.createCell(12);
-        maVachTT.setCellValue("Mã vạch");
-
-        Cell trangThaiTT = titleRow.createCell(13);
+        Cell trangThaiTT = titleRow.createCell(12);
         trangThaiTT.setCellValue("Trạng thái");
 
         for (ChiTietSanPham ctsp : list) {
@@ -760,7 +757,7 @@ public class SanPhamUI extends javax.swing.JPanel {
             Cell hinhAnh = row.createCell(11);
             hinhAnh.setCellValue(ctsp.getHinhAnh());
 
-            Cell trangThai = row.createCell(13);
+            Cell trangThai = row.createCell(12);
             trangThai.setCellValue(ctsp.getTinhTrang());
         }
 
@@ -768,12 +765,13 @@ public class SanPhamUI extends javax.swing.JPanel {
         try {
             fos = new FileOutputStream("sanPham.xlsx");
             workbook.write(fos);
+            JOptionPane.showMessageDialog(this, "Ghi file thành công");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        JOptionPane.showMessageDialog(this, "Ghi file thành công");
+
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
@@ -792,7 +790,6 @@ public class SanPhamUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblCTSP.getSelectedRow();
         ChiTietSanPham ctsp = ctspService.getList().get(row);
-
         SanPham sanPham = sanPhamService.getSPByMa(txtMa.getText());
         sanPham.setMa(txtMa.getText());
         sanPham.setTen(txtTen.getText());
@@ -815,8 +812,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         NSX nsx = nsxService.getList().get(cbxNSX.getSelectedIndex());
         ctsp.setNsx(nsx);
 
-        ctsp.setHinhAnh(lbAnh.getText());
-        System.out.println(lbAnh.getText());
+        ctsp.setHinhAnh(url);
         ctsp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         ctsp.setGiaNhap(Float.parseFloat(txtGiaNhap.getText()));
         ctsp.setGiaBan(Float.parseFloat(txtGiaBan.getText()));
@@ -824,7 +820,6 @@ public class SanPhamUI extends javax.swing.JPanel {
 
         boolean tinhTrang = !rdoOff.isSelected();
         ctsp.setTinhTrang(tinhTrang);
-        ctsp.setHinhAnh(null);
 
         if (ctspService.sua(ctsp)) {
             loadData(ctspService.getList());
@@ -857,15 +852,12 @@ public class SanPhamUI extends javax.swing.JPanel {
     private void lbAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnhMouseClicked
         // TODO add your handling code here:
         try {
-            String url = "";
-            JFileChooser chonFile = new JFileChooser("/");
+            JFileChooser chonFile = new JFileChooser("image/");
             chonFile.showOpenDialog(null);
             File anh = chonFile.getSelectedFile();
             url = anh.getAbsolutePath();
 
             lbAnh.setIcon(ResizeImage(url));
-//            System.out.println(anh.getName());
-            lbAnh.setText(anh.getName());
 
             File file = new File(url);
             file.renameTo(new File("image/SP/" + file.getName()));

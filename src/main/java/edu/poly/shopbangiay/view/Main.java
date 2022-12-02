@@ -4,6 +4,8 @@
  */
 package edu.poly.shopbangiay.view;
 
+import edu.poly.shopbangiay.model.NguoiDung;
+
 import java.awt.CardLayout;
 
 
@@ -22,11 +24,12 @@ public class Main extends javax.swing.JFrame {
         new BanHangUI().initWebcam(banHangUI1.Cam);
         cardLayout = (CardLayout) jPanel3.getLayout();
         cardLayout.show(jPanel3, "TrangChu");
-        
+//        NguoiDung nguoiDung = new Login().nguoiDung;
+//        lbCV.setText(nguoiDung.getTen());
         setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+        
     }
-    
     
 
     /**
@@ -58,7 +61,7 @@ public class Main extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lbCV = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
@@ -321,10 +324,10 @@ public class Main extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Chu Văn Quang");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(204, 102, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("-Admin-");
+        lbCV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbCV.setForeground(new java.awt.Color(204, 102, 255));
+        lbCV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCV.setText("-Admin-");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -334,7 +337,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbCV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -343,7 +346,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
+                .addComponent(lbCV)
                 .addContainerGap())
         );
 
@@ -453,7 +456,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 153));
-        jLabel2.setText("Đang hoàn thiện...");
+        jLabel2.setText("ABC.........");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Welcome.png"))); // NOI18N
 
@@ -714,7 +717,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -748,6 +750,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private edu.poly.shopbangiay.view.KhachHangUI khachHangUI1;
+    private javax.swing.JLabel lbCV;
     private edu.poly.shopbangiay.view.NhanVienUI nhanVienUI1;
     private edu.poly.shopbangiay.view.SanPhamUI sanPhamUI1;
     private edu.poly.shopbangiay.view.ThongKeUI thongKeUI1;

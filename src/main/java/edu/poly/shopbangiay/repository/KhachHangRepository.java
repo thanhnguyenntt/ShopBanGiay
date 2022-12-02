@@ -25,9 +25,13 @@ public class KhachHangRepository {
     }
 
     public KhachHang getKHByMa(String ma){
-        Query query = session.createQuery("from KhachHang where ma =: ma");
-        query.setParameter("ma", ma);
-        return (KhachHang) query.getSingleResult();
+        try {
+            Query query = session.createQuery("from KhachHang where ma =: ma");
+            query.setParameter("ma", ma);
+            return (KhachHang) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public Boolean them(KhachHang khachHang) {

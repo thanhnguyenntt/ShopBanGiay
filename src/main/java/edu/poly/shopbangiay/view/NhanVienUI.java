@@ -15,6 +15,8 @@ import table.TableCustom;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.io.File;
 import java.sql.Date;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class NhanVienUI extends javax.swing.JPanel {
     private DefaultTableModel defaultTableModel;
     private DefaultComboBoxModel defaultComboBoxModel;
     private NguoiDungService nguoiDungService = new NguoiDungServiceImpl();
-
+    String url = null;
     public NhanVienUI() {
         initComponents();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
@@ -145,7 +147,11 @@ public class NhanVienUI extends javax.swing.JPanel {
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
         lbAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbAnh.setText("Ảnh");
+        lbAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbAnhMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -408,6 +414,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         nguoiDung.setGioiTinh(gioiTinh);
         nguoiDung.setSdt(txtSDT.getText());
         nguoiDung.setEmail(txtEmail.getText());
+        nguoiDung.setAnh(url);
         ChucVu chucVu = new ChucVu();
         chucVu.setTen(cbxCV.getSelectedItem().toString());
         nguoiDung.setChucVu(chucVu);
@@ -423,10 +430,10 @@ public class NhanVienUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblND.getSelectedRow();
         NguoiDung nguoiDung = nguoiDungService.getList().get(row);
-        nguoiDung.setMa(genMa());
+        nguoiDung.setMa(txtMa.getText());
         nguoiDung.setTen(txtTen.getText());
         nguoiDung.setNgaySinh(Date.valueOf(txtNgaySinh.getText()));
-        nguoiDung.setMatKhau(txtMatKhau.getText());
+//        nguoiDung.setMatKhau(txtMatKhau.getText());
         boolean gioiTinh = true;
         if (rdoNu.isSelected()){
             gioiTinh = false;
@@ -434,6 +441,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         nguoiDung.setGioiTinh(gioiTinh);
         nguoiDung.setSdt(txtSDT.getText());
         nguoiDung.setEmail(txtEmail.getText());
+        nguoiDung.setAnh(url);
 
         ChucVu chucVu = new ChucVu();
         chucVu.setTen(cbxCV.getSelectedItem().toString());
@@ -469,6 +477,7 @@ public class NhanVienUI extends javax.swing.JPanel {
     private void tblNDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNDMouseClicked
         // TODO add your handling code here:
         int row = tblND.getSelectedRow();
+        NguoiDung nguoiDung = nguoiDungService.getList().get(row);
         txtMa.setText(tblND.getValueAt(row, 1).toString());
         txtTen.setText(tblND.getValueAt(row, 2).toString());
         txtNgaySinh.setText(tblND.getValueAt(row, 3).toString());
@@ -480,11 +489,36 @@ public class NhanVienUI extends javax.swing.JPanel {
         txtSDT.setText(tblND.getValueAt(row, 5).toString());
         txtEmail.setText(tblND.getValueAt(row, 6).toString());
         cbxCV.setSelectedItem(tblND.getValueAt(row, 7).toString());
+        lbAnh.setIcon(ResizeImage(new ImageIcon("image/" + nguoiDung.getAnh()).toString()));
     }//GEN-LAST:event_tblNDMouseClicked
-
+    public ImageIcon ResizeImage(String ImagePath) {
+        ImageIcon myImage = new ImageIcon(ImagePath);
+        Image img = myImage.getImage();
+        Image newImg = img.getScaledInstance(lbAnh.getWidth(), lbAnh.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDoiMKActionPerformed
+
+    private void lbAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnhMouseClicked
+        // TODO add your handling code here:
+        try {
+            JFileChooser chonFile = new JFileChooser("image/");
+            chonFile.showOpenDialog(null);
+            File anh = chonFile.getSelectedFile();
+            url = anh.getAbsolutePath();
+
+            lbAnh.setIcon(ResizeImage(url));
+
+            File file = new File(url);
+            file.renameTo(new File("image/SP/" + file.getName()));
+            url = file.getName();
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_lbAnhMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

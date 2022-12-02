@@ -2,7 +2,6 @@ package edu.poly.shopbangiay.repository;
 
 import edu.poly.shopbangiay.Ultilities.Hibernate;
 import edu.poly.shopbangiay.model.ChucVu;
-import edu.poly.shopbangiay.model.Loai;
 import edu.poly.shopbangiay.model.NguoiDung;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

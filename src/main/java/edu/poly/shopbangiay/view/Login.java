@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     private NguoiDungService nguoiDungService = new NguoiDungServiceImpl();
+    public NguoiDung nguoiDung;
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -28,7 +29,6 @@ public class Login extends javax.swing.JFrame {
     }
     
     public boolean check(){
-        List<NguoiDung> listNguoiDung = nguoiDungService.getList();
         if(txtUser.getText().isEmpty()){
             lbErrorUser.setText("Vui lòng nhập tài khoản !");
             return false;
@@ -41,17 +41,25 @@ public class Login extends javax.swing.JFrame {
         }else{
             lbErrorPass.setText("");
         }
-        if(txtUser.getText().equalsIgnoreCase("Quang") && txtPass.getText().equals("abc")){
-            lbErrorPass.setText("");
-        }else{
-            lbErrorPass.setText("Vui lòng kiểm tra lại tài khoản hoặc mật khẩu");
-            return false;
-
-        }
 
         return true;
     }
 
+    public NguoiDung getND(){
+        List<NguoiDung> listNguoiDung = nguoiDungService.getList();
+        for (NguoiDung nd : listNguoiDung) {
+            if(txtUser.getText().equals(nd.getSdt()) && txtPass.getText().equals(nd.getMatKhau())){
+                lbErrorPass.setText("");
+                Main main = new Main();
+                main.setVisible(true);
+                 nguoiDung = nd;
+                dispose();
+            }else{
+                lbErrorPass.setText("Vui lòng kiểm tra lại tài khoản hoặc mật khẩu");
+            }
+        }
+        return null;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -304,13 +312,9 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         // TODO add your handling code here:
-        
         if(check()){
-            Main main = new Main();
-            main.setVisible(true);
-            dispose();
+            getND();
         }
-        System.out.println(txtPass.getText());
     }//GEN-LAST:event_btnLoginMouseClicked
 
     public static void main(String args[]) {

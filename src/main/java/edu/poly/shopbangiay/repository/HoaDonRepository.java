@@ -23,6 +23,11 @@ public class HoaDonRepository {
         query.setParameter("ma", "%" + ma + "%");
         return query.getResultList();
     }
+    public List<HoaDon> locTT(Integer tt){
+        Query query = session.createQuery("from HoaDon where tinhTrang=: tt");
+        query.setParameter("tt", tt);
+        return query.getResultList();
+    }
 
     public HoaDon getHDByMa(String ma){
         try{

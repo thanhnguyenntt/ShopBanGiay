@@ -20,6 +20,11 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
+    public List<HoaDon> locTT(Integer tt) {
+        return hoaDonRepository.locTT(tt);
+    }
+
+    @Override
     public HoaDon getHDByMa(String ma) {
         return hoaDonRepository.getHDByMa(ma);
     }

@@ -7,6 +7,7 @@ import java.util.List;
 public interface HoaDonService {
     List<HoaDon> getList();
     HoaDon getOne(String ma);
+    List<HoaDon> locTT(Integer tt);
     HoaDon getHDByMa(String ma);
     List<HoaDon> timKiem(String ten);
     Boolean them(HoaDon hoaDon);

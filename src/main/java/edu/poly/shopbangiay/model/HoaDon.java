@@ -45,7 +45,7 @@ public class HoaDon implements Serializable {
     @Column
     private Date ngayTT;
     @Column
-    private Boolean tinhTrang;
+    private Integer tinhTrang;
 
     @OneToMany(mappedBy = "hoaDon", fetch = FetchType.LAZY)
     private List<ChiTietHoaDon> chiTietHoaDonList;

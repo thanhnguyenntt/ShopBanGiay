@@ -240,8 +240,10 @@
             <Component class="javax.swing.JLabel" name="lbAnh">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="&#x1ea2;nh"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbAnhMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

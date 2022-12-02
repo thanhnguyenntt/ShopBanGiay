@@ -48,7 +48,7 @@ public class HoaDonUI extends javax.swing.JPanel {
                     "hd.getVoucher().getPhanTramGiam()",
                     hd.getThanhTien(),
                     hd.getNgayTao(),
-                    hd.getTinhTrang() ? "Chưa thanh toán" : "Đã thanh toán",
+                    hd.getTinhTrang() ==0 ? "Chưa thanh toán" : "Đã thanh toán",
                     hd.getNgayTT()
             });
         }
