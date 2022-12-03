@@ -469,3 +469,4 @@ public class KhachHangUI extends javax.swing.JPanel {
     private textfield.TextField txtTim;
     // End of variables declaration//GEN-END:variables
 }
+
