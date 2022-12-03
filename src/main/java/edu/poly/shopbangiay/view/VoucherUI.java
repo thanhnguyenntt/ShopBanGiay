@@ -6,13 +6,16 @@ package edu.poly.shopbangiay.view;
 
 import edu.poly.shopbangiay.model.KhachHang;
 import edu.poly.shopbangiay.model.Voucher;
+import edu.poly.shopbangiay.raven.datechooser.DateChooser;
 import edu.poly.shopbangiay.service.VCService;
 import edu.poly.shopbangiay.service.impl.VCServiceImpl;
+import java.awt.Color;
 import table.TableCustom;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,11 +30,18 @@ public class VoucherUI extends javax.swing.JPanel {
      */
     private VCService vcService = new VCServiceImpl();
     private DefaultTableModel defaultTableModel;
+    private DateChooser dateChooser = new DateChooser();
+    private DateChooser dateChooser1 = new DateChooser();
     public VoucherUI() {
         initComponents();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         loadData(vcService.getList());
         groupTT();
+            
+        dateChooser.setDateFormat(new SimpleDateFormat("dd-mm-yyyy"));
+        dateChooser1.setDateFormat(new SimpleDateFormat("dd-mm-yyyy"));
+        dateChooser.setTextField(txtTuNgay);
+        dateChooser1.setTextField(txtDenNgay);
     }
 
     public void loadData(List<Voucher> list){

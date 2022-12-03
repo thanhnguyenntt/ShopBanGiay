@@ -12,15 +12,11 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import edu.poly.shopbangiay.model.*;
 import edu.poly.shopbangiay.service.*;
 import edu.poly.shopbangiay.service.impl.*;
-import edu.poly.shopbangiay.viewModel.VMCTSP;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -59,7 +55,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         initComponents();
         groupTT();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
-        loadData(ctspService.getList());
+        loadData(ctspService.timKiem(txtTim.getText()));
         loadCBX_Loai(ctspService.listLoai());
         loadCBX_Size(ctspService.listSize());
         loadCBX_CL(ctspService.listCL());
@@ -562,10 +558,9 @@ public class SanPhamUI extends javax.swing.JPanel {
 
         boolean tinhTrang = !rdoOff.isSelected();
         ctsp.setTinhTrang(tinhTrang);
-        ctsp.setHinhAnh(null);
 
         if (ctspService.them(ctsp)) {
-            loadData(ctspService.getList());
+            loadData(ctspService.timKiem(txtTim.getText()));
             JOptionPane.showMessageDialog(this, "Thêm thành công");
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
@@ -575,7 +570,7 @@ public class SanPhamUI extends javax.swing.JPanel {
     private void tblCTSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCTSPMouseClicked
         // TODO add your handling code here:
         int row = tblCTSP.getSelectedRow();
-        ChiTietSanPham ctsp = ctspService.getList().get(row);
+        ChiTietSanPham ctsp = ctspService.timKiem(txtTim.getText()).get(row);
 
         txtMa.setText(ctsp.getSanPham().getMa());
         txtTen.setText(ctsp.getSanPham().getTen());
@@ -653,6 +648,7 @@ public class SanPhamUI extends javax.swing.JPanel {
                 ctsp.setMauSac(mauSac);
 
                 NSX nsx = new NSX();
+
                 nsx.setTen(tenNSX);
                 ctsp.setNsx(nsx);
 
@@ -663,7 +659,8 @@ public class SanPhamUI extends javax.swing.JPanel {
                 ctsp.setHinhAnh(hinhAnh);
                 ctsp.setTinhTrang(Boolean.parseBoolean(trangThai));
 
-                list.add(ctsp);
+                sanPhamService.them(sanPham);
+                ctspService.them(ctsp);
                 loadData(ctspService.getList());
             }
         } catch (Exception e) {
@@ -789,7 +786,7 @@ public class SanPhamUI extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         int row = tblCTSP.getSelectedRow();
-        ChiTietSanPham ctsp = ctspService.getList().get(row);
+        ChiTietSanPham ctsp = ctspService.timKiem(txtTim.getText()).get(row);
         SanPham sanPham = sanPhamService.getSPByMa(txtMa.getText());
         sanPham.setMa(txtMa.getText());
         sanPham.setTen(txtTen.getText());
@@ -822,7 +819,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         ctsp.setTinhTrang(tinhTrang);
 
         if (ctspService.sua(ctsp)) {
-            loadData(ctspService.getList());
+            loadData(ctspService.timKiem(txtTim.getText()));
             JOptionPane.showMessageDialog(this, "Cập nhật thành công");
         } else {
             JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
@@ -832,10 +829,10 @@ public class SanPhamUI extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int row = tblCTSP.getSelectedRow();
-        ChiTietSanPham ctsp = ctspService.getList().get(row);
+        ChiTietSanPham ctsp = ctspService.timKiem(txtTim.getText()).get(row);
         SanPham sanPham = sanPhamService.getSPByMa(txtMa.getText());
         if (ctspService.xoa(ctsp) && sanPhamService.xoa(sanPham)) {
-            loadData(ctspService.getList());
+            loadData(ctspService.timKiem(txtTim.getText()));
             JOptionPane.showMessageDialog(this, "Xóa thành công");
         } else {
             JOptionPane.showMessageDialog(this, "Xóa thất bại");

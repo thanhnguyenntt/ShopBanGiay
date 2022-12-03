@@ -24,14 +24,14 @@ public class HoaDonRepository {
         return query.getResultList();
     }
     public List<HoaDon> locTT(Integer tt){
-        Query query = session.createQuery("from HoaDon where tinhTrang=: tt");
+        Query query = session.createQuery("from HoaDon where tinhTrang=: tt order by ngayTao desc");
         query.setParameter("tt", tt);
         return query.getResultList();
     }
 
     public HoaDon getHDByMa(String ma){
         try{
-            Query query = session.createQuery("from HoaDon where ma=: ma");
+            Query query = session.createQuery("from HoaDon where ma=: ma order by ngayTao desc");
             query.setParameter("ma", ma);
             return (HoaDon) query.getSingleResult();
         }catch (Exception e){

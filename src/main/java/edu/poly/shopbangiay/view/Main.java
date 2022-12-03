@@ -4,6 +4,7 @@
  */
 package edu.poly.shopbangiay.view;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import edu.poly.shopbangiay.model.NguoiDung;
 
 import java.awt.CardLayout;
@@ -680,6 +681,8 @@ public class Main extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        FlatIntelliJLaf.registerCustomDefaultsSource("style");
+        FlatIntelliJLaf.setup();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

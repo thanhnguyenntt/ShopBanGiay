@@ -133,21 +133,27 @@ public class KhachHangUI extends javax.swing.JPanel {
             .addComponent(lbAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
 
+        txtTen.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTen.setLabelText("Tên khách hàng");
 
+        txtMa.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtMa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMa.setLabelText("Mã khách hàng");
 
+        txtSDT.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtSDT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtSDT.setLabelText("Số điên thoại");
 
+        txtNgaySinh.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtNgaySinh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNgaySinh.setLabelText("Ngày sinh");
 
+        txtDiaChi.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtDiaChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtDiaChi.setLabelText("Địa chỉ");
 
+        txtEmail.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtEmail.setLabelText("Email");
 
@@ -155,11 +161,13 @@ public class KhachHangUI extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Giới tính:");
 
-        rdoNam.setForeground(new java.awt.Color(153, 153, 153));
+        rdoNam.setBackground(new java.awt.Color(204, 204, 204));
+        rdoNam.setForeground(new java.awt.Color(102, 102, 102));
         rdoNam.setText("Nam");
         rdoNam.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        rdoNu.setForeground(new java.awt.Color(153, 153, 153));
+        rdoNu.setBackground(new java.awt.Color(204, 204, 204));
+        rdoNu.setForeground(new java.awt.Color(102, 102, 102));
         rdoNu.setText("Nữ");
         rdoNu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -280,6 +288,7 @@ public class KhachHangUI extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
+        tblKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tblKH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

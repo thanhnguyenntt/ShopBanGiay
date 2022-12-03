@@ -7,6 +7,9 @@ package edu.poly.shopbangiay.view;
 import edu.poly.shopbangiay.model.ChucVu;
 import edu.poly.shopbangiay.model.NSX;
 import edu.poly.shopbangiay.model.NguoiDung;
+import edu.poly.shopbangiay.raven.datechooser.DateChooser;
+import edu.poly.shopbangiay.raven.datechooser.listener.DateChooserAction;
+import edu.poly.shopbangiay.raven.datechooser.listener.DateChooserAdapter;
 import edu.poly.shopbangiay.service.ChucVuService;
 import edu.poly.shopbangiay.service.NguoiDungService;
 import edu.poly.shopbangiay.service.impl.ChucVuServiceImpl;
@@ -18,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -32,16 +36,23 @@ public class NhanVienUI extends javax.swing.JPanel {
     private DefaultTableModel defaultTableModel;
     private DefaultComboBoxModel defaultComboBoxModel;
     private NguoiDungService nguoiDungService = new NguoiDungServiceImpl();
+    private ChucVuService chucVuService = new ChucVuServiceImpl();
+    private DateChooser dateChooser = new DateChooser();
     String url = null;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-[M]M-[d]d");
     public NhanVienUI() {
         initComponents();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         loadData(nguoiDungService.getList());
         groupGT();
         loadCBX_CV(nguoiDungService.listCV());
+        
+        dateChooser.setTextField(txtNgaySinh);
+        dateChooser.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
     }
 
     public void loadData(List<NguoiDung> list){
+
         defaultTableModel = (DefaultTableModel) tblND.getModel();
         defaultTableModel.setRowCount(0);
         int stt = 1;
@@ -51,7 +62,7 @@ public class NhanVienUI extends javax.swing.JPanel {
                     nguoiDung.getMa(),
                     nguoiDung.getTen(),
                     nguoiDung.getNgaySinh(),
-                    nguoiDung.getGioiTinh() == true ? "Nam" : "Nữ",
+                    nguoiDung.getGioiTinh() ? "Nam" : "Nữ",
                     nguoiDung.getSdt(),
                     nguoiDung.getEmail(),
                     nguoiDung.getChucVu().getTen()
@@ -415,8 +426,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         nguoiDung.setSdt(txtSDT.getText());
         nguoiDung.setEmail(txtEmail.getText());
         nguoiDung.setAnh(url);
-        ChucVu chucVu = new ChucVu();
-        chucVu.setTen(cbxCV.getSelectedItem().toString());
+        ChucVu chucVu = chucVuService.getList().get(cbxCV.getSelectedIndex());
         nguoiDung.setChucVu(chucVu);
         if (nguoiDungService.them(nguoiDung)){
             loadData(nguoiDungService.getList());
@@ -428,12 +438,12 @@ public class NhanVienUI extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        System.out.println(txtNgaySinh.getText());
         int row = tblND.getSelectedRow();
         NguoiDung nguoiDung = nguoiDungService.getList().get(row);
         nguoiDung.setMa(txtMa.getText());
         nguoiDung.setTen(txtTen.getText());
         nguoiDung.setNgaySinh(Date.valueOf(txtNgaySinh.getText()));
-//        nguoiDung.setMatKhau(txtMatKhau.getText());
         boolean gioiTinh = true;
         if (rdoNu.isSelected()){
             gioiTinh = false;
@@ -443,8 +453,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         nguoiDung.setEmail(txtEmail.getText());
         nguoiDung.setAnh(url);
 
-        ChucVu chucVu = new ChucVu();
-        chucVu.setTen(cbxCV.getSelectedItem().toString());
+        ChucVu chucVu = chucVuService.getList().get(cbxCV.getSelectedIndex());
         nguoiDung.setChucVu(chucVu);
         if (nguoiDungService.sua(nguoiDung)){
             loadData(nguoiDungService.getList());
@@ -489,7 +498,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         txtSDT.setText(tblND.getValueAt(row, 5).toString());
         txtEmail.setText(tblND.getValueAt(row, 6).toString());
         cbxCV.setSelectedItem(tblND.getValueAt(row, 7).toString());
-        lbAnh.setIcon(ResizeImage(new ImageIcon("image/" + nguoiDung.getAnh()).toString()));
+        lbAnh.setIcon(ResizeImage(new ImageIcon("image/ND/" + nguoiDung.getAnh()).toString()));
     }//GEN-LAST:event_tblNDMouseClicked
     public ImageIcon ResizeImage(String ImagePath) {
         ImageIcon myImage = new ImageIcon(ImagePath);
@@ -513,7 +522,7 @@ public class NhanVienUI extends javax.swing.JPanel {
             lbAnh.setIcon(ResizeImage(url));
 
             File file = new File(url);
-            file.renameTo(new File("image/SP/" + file.getName()));
+            file.renameTo(new File("image/ND/" + file.getName()));
             url = file.getName();
 
         } catch (Exception e) {

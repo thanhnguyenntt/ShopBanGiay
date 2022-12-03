@@ -52,24 +52,35 @@
             <artifactId>swingx</artifactId>
             <version>1.6.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-extras</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>svgSalamander</artifactId>
+            <version>1.1.4</version>
+        </dependency>
         <dependency>
             <groupId>com.miglayout</groupId>
-            <artifactId>miglayout</artifactId>
-            <version>3.7.4</version>
+            <artifactId>miglayout-swing</artifactId>
+            <version>11.0</version>
         </dependency>
 
 
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
-            <version>3.4.1</version>
+            <version>3.5.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>javase</artifactId>
-            <version>3.3.0</version>
-        </dependency>
 
         <!--     cam-->
         <dependency>
@@ -81,7 +92,7 @@
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>javase</artifactId>
-            <version>3.3.0</version>
+            <version>3.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.external</groupId>
@@ -100,6 +111,10 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 </project>
