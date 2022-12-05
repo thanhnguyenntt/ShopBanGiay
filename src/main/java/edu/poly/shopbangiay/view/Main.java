@@ -23,6 +23,7 @@ public class Main extends javax.swing.JFrame {
     CardLayout cardLayout;
     public Main() {
         initComponents();
+        setTitle("Phần mềm quản lý bán giày");
 //        new BanHangUI().initWebcam(banHangUI1.Cam);
         cardLayout = (CardLayout) jPanel3.getLayout();
         cardLayout.show(jPanel3, "TrangChu");

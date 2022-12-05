@@ -4,6 +4,7 @@
  */
 package edu.poly.shopbangiay.main;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import edu.poly.shopbangiay.view.Login;
 
 /**
@@ -12,9 +13,11 @@ import edu.poly.shopbangiay.view.Login;
  */
 public class Application {
     public static void main(String[] args) {
+        FlatIntelliJLaf.registerCustomDefaultsSource("style");
+        FlatIntelliJLaf.setup();
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("FlatLaf Light".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
