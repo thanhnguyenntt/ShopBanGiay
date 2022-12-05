@@ -771,13 +771,10 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         int row = tblHD.getSelectedRow();
         HoaDon hoaDon = locHD().get(row);
         txtMaHD.setText(hoaDon.getMa());
-        if (hoaDon.getTinhTrang() == 1) {
-            cbxKH.setSelectedItem(hoaDon.getKhachHang().getTen());
-            cbxVC.setSelectedItem(hoaDon.getVoucher().getTen());
-        } else {
-            cbxKH.setSelectedIndex(0);
-            cbxVC.setSelectedIndex(0);
-        }
+
+        cbxKH.setSelectedItem(hoaDon.getKhachHang().getTen());
+        cbxVC.setSelectedItem(hoaDon.getVoucher().getTen());
+
         loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
         txtTongTien.setText(tongTien().toString());
     }//GEN-LAST:event_tblHDMouseClicked
@@ -791,6 +788,10 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         hoaDon.setNguoiDung(nguoiDung);
         hoaDon.setNgayTao(Date.valueOf(LocalDate.now()));
         hoaDon.setTinhTrang(0);
+        KhachHang khachHang = khachHangService.getList().get(0);
+        hoaDon.setKhachHang(khachHang);
+        Voucher voucher = vcService.getList().get(0);
+        hoaDon.setVoucher(voucher);
 
         hoaDonService.them(hoaDon);
         loadHD(locHD());
@@ -814,7 +815,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                 hoaDon.setThanhTien(Float.parseFloat(txtThanhTien.getText()));
                 NguoiDung nguoiDung = nguoiDungService.getList().get(0);
                 hoaDon.setNguoiDung(nguoiDung);
-                KhachHang khachHang = khachHangService.getList().get(cbxKH.getSelectedIndex());
+                KhachHang khachHang = khachHangService.getList().get(cbxKH.getSelectedIndex() + 1);
                 hoaDon.setKhachHang(khachHang);
                 hoaDon.setTinhTrang(1);
                 hoaDon.setNgayTT(Date.valueOf(LocalDate.now()));
