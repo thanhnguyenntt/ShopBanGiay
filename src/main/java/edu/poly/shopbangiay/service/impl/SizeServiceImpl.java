@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.Size;
-import edu.poly.shopbangiay.repository.SizeRepository;
+import edu.poly.shopbangiay.raven.repository.SizeRepository;
 import edu.poly.shopbangiay.service.SizeService;
 
 import java.util.List;

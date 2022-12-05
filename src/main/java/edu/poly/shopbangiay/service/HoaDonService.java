@@ -2,11 +2,12 @@ package edu.poly.shopbangiay.service;
 
 import edu.poly.shopbangiay.model.HoaDon;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface HoaDonService {
     List<HoaDon> getList();
-    HoaDon getOne(String ma);
+    Double doanhThuNgay(Date date);
     List<HoaDon> locTT(Integer tt);
     HoaDon getHDByMa(String ma);
     List<HoaDon> timKiem(String ten);

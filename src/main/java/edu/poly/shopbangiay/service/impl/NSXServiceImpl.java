@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.NSX;
-import edu.poly.shopbangiay.repository.NSXRepository;
+import edu.poly.shopbangiay.raven.repository.NSXRepository;
 import edu.poly.shopbangiay.service.NSXService;
 
 import java.util.List;

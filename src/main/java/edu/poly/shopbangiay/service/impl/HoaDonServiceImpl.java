@@ -1,9 +1,10 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.HoaDon;
-import edu.poly.shopbangiay.repository.HoaDonRepository;
+import edu.poly.shopbangiay.raven.repository.HoaDonRepository;
 import edu.poly.shopbangiay.service.HoaDonService;
 
+import java.sql.Date;
 import java.util.List;
 
 public class HoaDonServiceImpl implements HoaDonService {
@@ -15,8 +16,8 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
-    public HoaDon getOne(String ma) {
-        return null;
+    public Double doanhThuNgay(Date date) {
+        return hoaDonRepository.doanhThuNgay(date);
     }
 
     @Override

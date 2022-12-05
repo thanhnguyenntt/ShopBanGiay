@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.Loai;
-import edu.poly.shopbangiay.repository.LoaiRepository;
+import edu.poly.shopbangiay.raven.repository.LoaiRepository;
 import edu.poly.shopbangiay.service.LoaiService;
 
 import java.util.List;

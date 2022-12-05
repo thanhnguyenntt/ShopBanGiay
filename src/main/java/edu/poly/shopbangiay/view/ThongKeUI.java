@@ -4,7 +4,12 @@
  */
 package edu.poly.shopbangiay.view;
 
+import edu.poly.shopbangiay.service.HoaDonService;
+import edu.poly.shopbangiay.service.impl.HoaDonServiceImpl;
 import table.TableCustom;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -15,10 +20,17 @@ public class ThongKeUI extends javax.swing.JPanel {
     /**
      * Creates new form ThongKeUI
      */
+    HoaDonService hoaDonService = new HoaDonServiceImpl();
     public ThongKeUI() {
         initComponents();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
+//        doanhthuNgay();
+    }
+
+    public void doanhthuNgay(){
+        lbDTHN.setText(hoaDonService.doanhThuNgay(Date.valueOf(LocalDate.now())).toString() + "VNĐ");
+
     }
 
     /**
@@ -32,7 +44,7 @@ public class ThongKeUI extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbDTHN = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -51,16 +63,17 @@ public class ThongKeUI extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel1.setForeground(new java.awt.Color(153, 0, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Doanh thu hôm nay");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("0 VNĐ");
+        lbDTHN.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbDTHN.setForeground(new java.awt.Color(255, 255, 255));
+        lbDTHN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbDTHN.setText("19231430 VNĐ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -69,7 +82,7 @@ public class ThongKeUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbDTHN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -79,7 +92,7 @@ public class ThongKeUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addComponent(lbDTHN, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -91,8 +104,9 @@ public class ThongKeUI extends javax.swing.JPanel {
         jLabel2.setText("Doanh thu tháng này");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("0 VNĐ");
+        jLabel5.setText("23126430 VNĐ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -123,8 +137,9 @@ public class ThongKeUI extends javax.swing.JPanel {
         jLabel3.setText("Doanh thu Năm này");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("0 VNĐ");
+        jLabel6.setText("23126430 VNĐ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -154,7 +169,7 @@ public class ThongKeUI extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "STT", "", "", ""
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -196,7 +211,7 @@ public class ThongKeUI extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "STT", "", "", ""
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -252,7 +267,6 @@ public class ThongKeUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -265,6 +279,7 @@ public class ThongKeUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lbDTHN;
     private table.TableScrollButton tableScrollButton1;
     private table.TableScrollButton tableScrollButton2;
     // End of variables declaration//GEN-END:variables

@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.Voucher;
-import edu.poly.shopbangiay.repository.VCRepository;
+import edu.poly.shopbangiay.raven.repository.VCRepository;
 import edu.poly.shopbangiay.service.VCService;
 
 import java.util.List;

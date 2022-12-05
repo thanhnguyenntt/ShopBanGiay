@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.*;
-import edu.poly.shopbangiay.repository.CTSPRepository;
+import edu.poly.shopbangiay.raven.repository.CTSPRepository;
 import edu.poly.shopbangiay.service.CTSPService;
 import edu.poly.shopbangiay.viewModel.VMCTSP;
 

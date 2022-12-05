@@ -26,7 +26,7 @@ public class Main extends javax.swing.JFrame {
         setTitle("Phần mềm quản lý bán giày");
 //        new BanHangUI().initWebcam(banHangUI1.Cam);
         cardLayout = (CardLayout) jPanel3.getLayout();
-        cardLayout.show(jPanel3, "TrangChu");
+        cardLayout.show(jPanel3, "BanHang");
 //        NguoiDung nguoiDung = new Login().nguoiDung;
 //        lbCV.setText(nguoiDung.getTen());
         setExtendedState(MAXIMIZED_BOTH);
@@ -716,7 +716,7 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private edu.poly.shopbangiay.view.BanHangUI banHangUI1;
     private edu.poly.shopbangiay.view.HoaDonUI hoaDonUI1;
     private javax.swing.JLabel jLabel1;
@@ -760,5 +760,5 @@ public class Main extends javax.swing.JFrame {
     private edu.poly.shopbangiay.view.SanPhamUI sanPhamUI1;
     private edu.poly.shopbangiay.view.ThongKeUI thongKeUI1;
     private edu.poly.shopbangiay.view.VoucherUI voucherUI1;
-    // End of variables declaration//GEN-END:variables
+
 }
