@@ -14,6 +14,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+
 import edu.poly.shopbangiay.model.*;
 import edu.poly.shopbangiay.service.*;
 import edu.poly.shopbangiay.service.impl.*;
@@ -165,15 +166,16 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 
     public Boolean checkTT() {
         int row = tblHD.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng click lại hóa đơn");
-            return false;
-        }
-        HoaDon hoaDon = locHD().get(row);
-        if (hoaDon.getTinhTrang() == 1) {
-            JOptionPane.showMessageDialog(this, "Hóa đơn đã thanh toám");
-            return false;
-        }
+        int index = cbxTT.getSelectedIndex();
+//        if (row == -1) {
+//            JOptionPane.showMessageDialog(this, "Vui lòng click lại hóa đơn");
+//            return false;
+//        }
+        HoaDon hoaDon = locHD().get(index);
+//        if (hoaDon.getTinhTrang() == 1) {
+//            JOptionPane.showMessageDialog(this, "Hóa đơn đã thanh toám");
+//            return false;
+//        }
         return true;
     }
 
@@ -245,8 +247,8 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
     }
 
     private void addToGioHang() {
-        System.out.println(tblHD.getSelectedRow());
-        if (tblHD.getSelectedRow() == -1) {
+
+        if (!txtMaHD.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Chọn hóa đơn trước");
         } else {
             HoaDon hoaDon = hoaDonService.getHDByMa(txtMaHD.getText());
@@ -334,6 +336,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSP = new javax.swing.JTable();
         Cam = new javax.swing.JPanel();
+        btnOnCam = new edu.poly.shopbangiay.raven.button.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 102), 2, true));
@@ -391,10 +394,10 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(cbxTT, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnThemHD, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
-                        .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -664,6 +667,13 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         Cam.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Webcam", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         Cam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnOnCam.setText("On Cam");
+        btnOnCam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOnCamActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -673,7 +683,9 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(Cam, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(Cam, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnOnCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -682,9 +694,12 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Cam, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(Cam, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnOnCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -870,10 +885,17 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         loadCBXKH(khachHangService.getList());
     }//GEN-LAST:event_btnThemKHActionPerformed
 
+    private void btnOnCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnCamActionPerformed
+        // TODO add your handling code here:
+        initWebcam(Cam);
+
+    }//GEN-LAST:event_btnOnCamActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel Cam;
     private edu.poly.shopbangiay.raven.button.Button btnHuyHD;
+    private edu.poly.shopbangiay.raven.button.Button btnOnCam;
     private edu.poly.shopbangiay.raven.button.Button btnThanhToan;
     private edu.poly.shopbangiay.raven.button.Button btnThemHD;
     private edu.poly.shopbangiay.raven.button.Button btnThemKH;
@@ -915,6 +937,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         panel.setMirrored(true);
         panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
 
+        setVisible(true);
         executor.execute(this);
     }
 
@@ -946,17 +969,62 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                 }
             }
             if (result != null) {
-                try {
-                    String maSP = result.getText();
-                    for (int i = 0; i < tblSP.getRowCount(); i++) {
-                        if (tblSP.getValueAt(i, 1).equals(maSP)) {
-                            System.out.println(txtMaHD.getText());
-                            addToGioHang();
-                            tblSP.setRowSelectionInterval(i, 1);
+                String maSP = result.getText();
+                for (int i = 0; i < tblSP.getRowCount(); i++) {
+                    if (tblSP.getValueAt(i, 1).equals(maSP)) {
+                        if (txtMaHD.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(this, "Chọn hóa đơn trước");
+                        } else {
+                            HoaDon hoaDon = hoaDonService.getHDByMa(txtMaHD.getText());
+                            if (checkTT()) {
+                                int rowSP = tblSP.getSelectedRow();
+                                ChiTietSanPham ctsp = ctspService.getCTSPByMaSP(result.getText());
+                                if (ctsp.getSoLuong() == 0) {
+                                    JOptionPane.showMessageDialog(this, "Hết hàng");
+                                    return;
+                                } else {
+                                    String input = JOptionPane.showInputDialog("Nhập số lượng sản phẩm: ");
+                                    try {
+                                        Integer.parseInt(input);
+                                    } catch (Exception e) {
+                                        JOptionPane.showMessageDialog(this, "Nhập lại số lượng");
+                                        return;
+                                    }
+                                    if (Integer.parseInt(input) > ctsp.getSoLuong()) {
+                                        JOptionPane.showMessageDialog(this, "Không đủ, số lượng còn lại: " + ctsp.getSoLuong());
+                                        return;
+                                    }
+                                    if (Integer.parseInt(input) <= 0) {
+                                        JOptionPane.showMessageDialog(this, "Số lượng nhập vào phải lớn hơn 0");
+                                        return;
+                                    } else {
+                                        if (cthdService.getCTHD(hoaDon.getId(), ctsp.getId()) == null) {
+                                            ChiTietHoaDon cthd = new ChiTietHoaDon();
+                                            cthd.setHoaDon(hoaDonService.getHDByMa(txtMaHD.getText()));
+                                            cthd.setChiTietSanPham(ctspService.getCTSPByMaSP(result.getText()));
+
+                                            cthd.setSoLuong(Integer.parseInt(input));
+                                            cthd.setDonGia(Float.parseFloat(ctsp.getGiaBan().toString()));
+
+                                            cthdService.them(cthd);
+                                        } else {
+                                            ChiTietHoaDon cthd = cthdService.getCTHD(hoaDon.getId(), ctsp.getId());
+                                            cthd.setSoLuong(cthd.getSoLuong() + Integer.parseInt(input));
+                                            cthdService.sua(cthd);
+                                        }
+
+                                        loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
+                                        txtTongTien.setText(tongTien().toString());
+                                        ctsp.setSoLuong(ctsp.getSoLuong() - Integer.parseInt(input));
+                                        ctspService.sua(ctsp);
+                                    }
+                                }
+                            }
+
                         }
+                        loadSP(ctspService.timKiem(txtTimSP.getText()));
+                        txtTongTien.setText(tongTien().toString());
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }

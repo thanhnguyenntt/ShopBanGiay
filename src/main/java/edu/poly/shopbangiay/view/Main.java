@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import edu.poly.shopbangiay.model.NguoiDung;
 
 import java.awt.CardLayout;
+import java.util.concurrent.ThreadFactory;
 
 
 /**
@@ -22,7 +23,7 @@ public class Main extends javax.swing.JFrame {
     CardLayout cardLayout;
     public Main() {
         initComponents();
-        new BanHangUI().initWebcam(banHangUI1.Cam);
+//        new BanHangUI().initWebcam(banHangUI1.Cam);
         cardLayout = (CardLayout) jPanel3.getLayout();
         cardLayout.show(jPanel3, "TrangChu");
 //        NguoiDung nguoiDung = new Login().nguoiDung;
