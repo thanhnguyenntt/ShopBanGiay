@@ -51,10 +51,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import table.TableCustom;
 
-public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
+public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory {
 
     /**
      * Creates new form Main
@@ -64,7 +65,7 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
     private Webcam webcam = null;
     private WebcamPanel panel = null;
     private JTextArea textarea = null;
-    
+
     private DefaultTableModel defaultTableModel;
     private DefaultComboBoxModel defaultComboBoxModel;
     private CTSPService ctspService = new CTSPServiceImpl();
@@ -73,10 +74,10 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
     private KhachHangService khachHangService = new KhachHangServiceImpl();
     private NguoiDungService nguoiDungService = new NguoiDungServiceImpl();
     private VCService vcService = new VCServiceImpl();
-    
-    
+
+
     CardLayout cardLayout;
-    
+
     public Main() {
         initComponents();
         setTitle("Phần mềm quản lý bán giày");
@@ -84,7 +85,7 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
         cardLayout.show(jPanel3, "BanHang");
         setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
-        
+
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
         TableCustom.apply(jScrollPane3, TableCustom.TableType.DEFAULT);
@@ -93,10 +94,10 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
         loadCBXKH(khachHangService.getList());
         loadCBXVC(vcService.getList());
         loadCBX_TT();
-        
+
         initWebcam(Cam);
     }
-    
+
     public void loadCBX_TT() {
         defaultComboBoxModel = (DefaultComboBoxModel) cbxTT.getModel();
         defaultComboBoxModel.removeAllElements();
@@ -368,6 +369,7 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
         tableScrollButton2 = new table.TableScrollButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGH = new javax.swing.JTable();
+        btnXoaAll = new edu.poly.shopbangiay.raven.button.Button();
         Cam = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
         txtTimSP = new textfield.TextField();
@@ -843,19 +845,32 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
 
         tableScrollButton2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
+        btnXoaAll.setBackground(new java.awt.Color(255, 236, 236));
+        btnXoaAll.setText("Xóa tất cả");
+        btnXoaAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel26Layout.createSequentialGroup()
-                .addComponent(tableScrollButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tableScrollButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
+                .addContainerGap(809, Short.MAX_VALUE)
+                .addComponent(btnXoaAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tableScrollButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+                .addComponent(tableScrollButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXoaAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         Cam.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Webcam", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -915,7 +930,7 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
             .addGroup(jPanel27Layout.createSequentialGroup()
                 .addComponent(txtTimSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
+                .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
         );
 
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
@@ -1381,10 +1396,10 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
         int row = tblHD.getSelectedRow();
         HoaDon hoaDon = locHD().get(row);
         txtMaHD.setText(hoaDon.getMa());
-        if (hoaDon.getTinhTrang() == 0){
+        if (hoaDon.getTinhTrang() == 0) {
             cbxKH.setSelectedIndex(0);
             cbxVC.setSelectedIndex(0);
-        }else {
+        } else {
             cbxKH.setSelectedItem(hoaDon.getKhachHang().getTen());
             cbxVC.setSelectedItem(hoaDon.getVoucher().getTen());
         }
@@ -1522,6 +1537,25 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
         addToGioHang();
     }//GEN-LAST:event_tblSPMouseClicked
 
+    private void btnXoaAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaAllActionPerformed
+        // TODO add your handling code here:
+        if(checkTT()) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Bỏ tất cả sản phẩm ra khỏi giỏ hàng?");
+            if (confirm == 0) {
+                for (int i = 0; i < tblGH.getRowCount(); i++) {
+                    ChiTietHoaDon cthd = cthdService.getCTHDByMaHD(txtMaHD.getText()).get(0);
+                    ChiTietSanPham ctsp = cthd.getChiTietSanPham();
+                    ctsp.setSoLuong(ctsp.getSoLuong() + cthd.getSoLuong());
+                    ctspService.sua(ctsp);
+                    cthdService.xoa(cthd);
+                }
+            }
+        }
+        loadSP(ctspService.timKiem(txtTimSP.getText()));
+        loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
+
+    }//GEN-LAST:event_btnXoaAllActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1531,7 +1565,7 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1565,6 +1599,7 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
     private edu.poly.shopbangiay.raven.button.Button btnThanhToan;
     private edu.poly.shopbangiay.raven.button.Button btnThemHD;
     private edu.poly.shopbangiay.raven.button.Button btnThemKH;
+    private edu.poly.shopbangiay.raven.button.Button btnXoaAll;
     private combo_suggestion.ComboBoxSuggestion cbxKH;
     private combo_suggestion.ComboBoxSuggestion cbxTT;
     private combo_suggestion.ComboBoxSuggestion cbxVC;
@@ -1685,7 +1720,6 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory{
                         } else {
                             HoaDon hoaDon = hoaDonService.getHDByMa(txtMaHD.getText());
                             if (checkTT()) {
-                                int rowSP = tblSP.getSelectedRow();
                                 ChiTietSanPham ctsp = ctspService.getCTSPByMaSP(result.getText());
                                 if (ctsp.getSoLuong() == 0) {
                                     JOptionPane.showMessageDialog(this, "Hết hàng");
