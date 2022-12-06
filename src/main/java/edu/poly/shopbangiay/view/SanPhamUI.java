@@ -23,6 +23,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -53,8 +55,8 @@ public class SanPhamUI extends javax.swing.JPanel {
     String url = null;
     public SanPhamUI() {
         initComponents();
-        groupTT();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
+        groupTT();
         loadData(ctspService.timKiem(txtTim.getText()));
         loadCBX_Loai(ctspService.listLoai());
         loadCBX_Size(ctspService.listSize());
@@ -82,6 +84,21 @@ public class SanPhamUI extends javax.swing.JPanel {
             });
         }
     }
+    public void clearForm(){
+        lbAnh.setIcon(null);
+        txtMota.setText("");
+        txtGiaNhap.setText("");
+        txtTen.setText("");
+        txtMa.setText("");
+        txtGiaBan.setText("");
+        txtSoLuong.setText("");
+        cbxCL.setSelectedIndex(0);
+        cbxMS.setSelectedIndex(0);
+        cbxSize.setSelectedIndex(0);
+        cbxLoai.setSelectedIndex(0);
+        cbxNSX.setSelectedIndex(0);
+    }
+
 
     ButtonGroup rdoTrangThai = new ButtonGroup();
 
@@ -145,6 +162,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         return null;
     }
 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -160,7 +178,6 @@ public class SanPhamUI extends javax.swing.JPanel {
         lbAnh = new javax.swing.JLabel();
         txtTen = new textfield.TextField();
         txtMa = new textfield.TextField();
-        txtMaVach = new textfield.TextField();
         txtSoLuong = new textfield.TextField();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -219,9 +236,6 @@ public class SanPhamUI extends javax.swing.JPanel {
 
         txtMa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtMa.setLabelText("Mã sản phẩm");
-
-        txtMaVach.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtMaVach.setLabelText("Mã vạch");
 
         txtSoLuong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtSoLuong.setLabelText("Số lượng");
@@ -365,18 +379,6 @@ public class SanPhamUI extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtMaVach, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxCL, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rdoOn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rdoOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,7 +397,17 @@ public class SanPhamUI extends javax.swing.JPanel {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(cbxNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(18, 18, 18)
-                                        .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbxCL, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdoOn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdoOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel1)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 28, Short.MAX_VALUE))
@@ -443,14 +455,13 @@ public class SanPhamUI extends javax.swing.JPanel {
                             .addComponent(textAreaScroll1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMaVach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbxCL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(rdoOn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rdoOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNhapFile, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -499,7 +510,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tableScrollButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -582,7 +593,6 @@ public class SanPhamUI extends javax.swing.JPanel {
 
         txtMa.setText(ctsp.getSanPham().getMa());
         txtTen.setText(ctsp.getSanPham().getTen());
-        txtMaVach.setText("");
         txtSoLuong.setText(ctsp.getSoLuong().toString());
         txtGiaNhap.setText(ctsp.getGiaNhap().toString());
         txtGiaBan.setText(ctsp.getGiaBan().toString());
@@ -789,6 +799,11 @@ public class SanPhamUI extends javax.swing.JPanel {
             }
         });
         dialog.setVisible(true);
+        loadCBX_Loai(ctspService.listLoai());
+        loadCBX_Size(ctspService.listSize());
+        loadCBX_CL(ctspService.listCL());
+        loadCBX_MS(ctspService.listMS());
+        loadCBX_NSX(ctspService.listNSX());
     }//GEN-LAST:event_btnQLActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -893,6 +908,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         String outputFile = "image/QR/" + data + ".png";
         Path path = FileSystems.getDefault().getPath(outputFile);
         MatrixToImageWriter.writeToPath(matrix, "PNG", path);
+        JOptionPane.showMessageDialog(this, "Lưu QR thành công tại \n" + path);
     }//GEN-LAST:event_btnGenQRActionPerformed
 
 
@@ -926,7 +942,6 @@ public class SanPhamUI extends javax.swing.JPanel {
     private textfield.TextField txtGiaBan;
     private textfield.TextField txtGiaNhap;
     private textfield.TextField txtMa;
-    private textfield.TextField txtMaVach;
     private textarea.TextArea txtMota;
     private textfield.TextField txtSoLuong;
     private textfield.TextField txtTen;

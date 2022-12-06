@@ -9,18 +9,20 @@ import edu.poly.shopbangiay.model.Voucher;
 import edu.poly.shopbangiay.raven.datechooser.DateChooser;
 import edu.poly.shopbangiay.service.VCService;
 import edu.poly.shopbangiay.service.impl.VCServiceImpl;
+
 import java.awt.Color;
+
 import table.TableCustom;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
 /**
- *
  * @author Quang
  */
 public class VoucherUI extends javax.swing.JPanel {
@@ -32,19 +34,23 @@ public class VoucherUI extends javax.swing.JPanel {
     private DefaultTableModel defaultTableModel;
     private DateChooser dateChooser = new DateChooser();
     private DateChooser dateChooser1 = new DateChooser();
+
+    DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
     public VoucherUI() {
         initComponents();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
-        loadData(vcService.getList());
+        loadData(vcService.timKiem(txtTim.getText()));
         groupTT();
-            
-        dateChooser.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-        dateChooser1.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
+
+        dateChooser.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+        dateChooser1.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
         dateChooser.setTextField(txtTuNgay);
         dateChooser1.setTextField(txtDenNgay);
+
     }
 
-    public void loadData(List<Voucher> list){
+    public void loadData(List<Voucher> list) {
         defaultTableModel = (DefaultTableModel) tblVC.getModel();
         defaultTableModel.setRowCount(0);
 
@@ -55,9 +61,9 @@ public class VoucherUI extends javax.swing.JPanel {
                     vc.getMa(),
                     vc.getTen(),
                     vc.getPhanTramGiam(),
-                    vc.getNgayTao(),
-                    vc.getNgayBD(),
-                    vc.getNgayKT(),
+                    simpleDateFormat.format(vc.getNgayTao()),
+                    simpleDateFormat.format(vc.getNgayBD()),
+                    simpleDateFormat.format(vc.getNgayKT()),
                     vc.getTrangThai() ? "Hoạt động" : "Hết hạn",
                     vc.getMoTa()
             });
@@ -75,10 +81,12 @@ public class VoucherUI extends javax.swing.JPanel {
     }
 
     ButtonGroup rdoTT = new ButtonGroup();
-    public void groupTT(){
+
+    public void groupTT() {
         rdoTT.add(rdoOnl);
         rdoTT.add(rdoHetHan);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -280,7 +288,15 @@ public class VoucherUI extends javax.swing.JPanel {
             new String [] {
                 "STT", "Mã", "Tên", "Giảm", "Ngày tạo", "Ngày áp dụng", "Ngày hết hạn", "Trạng thái", "Mô tả"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblVC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblVCMouseClicked(evt);
@@ -320,14 +336,14 @@ public class VoucherUI extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int confirm = JOptionPane.showConfirmDialog(this, "Xóa khuyến mại này");
-        if (confirm == 0){
+        if (confirm == 0) {
             int row = tblVC.getSelectedRow();
-            Voucher voucher = vcService.getList().get(row);
+            Voucher voucher = vcService.timKiem(txtTim.getText()).get(row);
 
-            if (vcService.xoa(voucher)){
-                loadData(vcService.getList());
+            if (vcService.xoa(voucher)) {
+                loadData(vcService.timKiem(txtTim.getText()));
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại");
             }
         }
@@ -337,24 +353,24 @@ public class VoucherUI extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         int row = tblVC.getSelectedRow();
-        Voucher voucher = vcService.getList().get(row);
+        Voucher voucher = vcService.timKiem(txtTim.getText()).get(row);
         voucher.setMa(txtMa.getText());
         voucher.setTen(txtTen.getText());
         voucher.setPhanTramGiam(Integer.parseInt(txtGiam.getText()));
-        voucher.setNgayTao(Date.valueOf(LocalDate.now()));
+        voucher.setNgayTao(Date.valueOf(txtNgayTao.getText()));
         voucher.setNgayBD(Date.valueOf(txtTuNgay.getText()));
         voucher.setNgayKT(Date.valueOf(txtDenNgay.getText()));
         boolean trangThai = true;
-        if (rdoHetHan.isSelected()){
+        if (rdoHetHan.isSelected()) {
             trangThai = false;
         }
         voucher.setTrangThai(trangThai);
         voucher.setMoTa(txtMoTa.getText());
 
-        if (vcService.sua(voucher)){
-            loadData(vcService.getList());
+        if (vcService.sua(voucher)) {
+            loadData(vcService.timKiem(txtTim.getText()));
             JOptionPane.showMessageDialog(this, "Sửa thành công");
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "Sửa thất bại");
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -369,16 +385,16 @@ public class VoucherUI extends javax.swing.JPanel {
         voucher.setNgayBD(Date.valueOf(txtTuNgay.getText()));
         voucher.setNgayKT(Date.valueOf(txtDenNgay.getText()));
         boolean trangThai = true;
-        if (rdoHetHan.isSelected()){
+        if (rdoHetHan.isSelected()) {
             trangThai = false;
         }
         voucher.setTrangThai(trangThai);
         voucher.setMoTa(txtMoTa.getText());
 
-        if (vcService.them(voucher)){
-            loadData(vcService.getList());
+        if (vcService.them(voucher)) {
+            loadData(vcService.timKiem(txtTim.getText()));
             JOptionPane.showMessageDialog(this, "Thêm thành công");
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -386,16 +402,16 @@ public class VoucherUI extends javax.swing.JPanel {
     private void tblVCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVCMouseClicked
         // TODO add your handling code here:
         int row = tblVC.getSelectedRow();
-        Voucher voucher = vcService.getList().get(row);
+        Voucher voucher = vcService.timKiem(txtTim.getText()).get(row);
         txtMa.setText(voucher.getMa());
         txtTen.setText(voucher.getTen());
         txtGiam.setText(voucher.getPhanTramGiam().toString());
         txtNgayTao.setText(voucher.getNgayTao().toString());
         txtTuNgay.setText(voucher.getNgayBD().toString());
         txtDenNgay.setText(voucher.getNgayKT().toString());
-        if(voucher.getTrangThai() == true){
+        if (voucher.getTrangThai() == true) {
             rdoOnl.setSelected(true);
-        }else {
+        } else {
             rdoOnl.setSelected(false);
         }
         txtMoTa.setText(voucher.getMoTa());

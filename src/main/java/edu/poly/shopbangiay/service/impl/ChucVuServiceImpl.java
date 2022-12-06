@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.ChucVu;
-import edu.poly.shopbangiay.raven.repository.ChucVuRepository;
+import edu.poly.shopbangiay.repository.ChucVuRepository;
 import edu.poly.shopbangiay.service.ChucVuService;
 
 import java.util.List;

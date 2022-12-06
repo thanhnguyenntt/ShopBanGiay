@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.KhachHang;
-import edu.poly.shopbangiay.raven.repository.KhachHangRepository;
+import edu.poly.shopbangiay.repository.KhachHangRepository;
 import edu.poly.shopbangiay.service.KhachHangService;
 
 import java.util.List;

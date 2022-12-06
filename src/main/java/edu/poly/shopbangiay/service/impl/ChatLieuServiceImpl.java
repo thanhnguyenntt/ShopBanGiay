@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.ChatLieu;
-import edu.poly.shopbangiay.raven.repository.ChatLieuRepository;
+import edu.poly.shopbangiay.repository.ChatLieuRepository;
 import edu.poly.shopbangiay.service.ChatLieuService;
 
 import java.util.List;

@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class NhanVienUI extends javax.swing.JPanel {
     private ChucVuService chucVuService = new ChucVuServiceImpl();
     private DateChooser dateChooser = new DateChooser();
     String url = null;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-[M]M-[d]d");
+    DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
     public NhanVienUI() {
         initComponents();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
@@ -47,8 +48,8 @@ public class NhanVienUI extends javax.swing.JPanel {
         groupGT();
         loadCBX_CV(nguoiDungService.listCV());
         
-        dateChooser.setTextField(txtNgaySinh);
         dateChooser.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+        dateChooser.setTextField(txtNgaySinh);
     }
 
     public void loadData(List<NguoiDung> list){
@@ -61,13 +62,23 @@ public class NhanVienUI extends javax.swing.JPanel {
                     stt++,
                     nguoiDung.getMa(),
                     nguoiDung.getTen(),
-                    nguoiDung.getNgaySinh(),
+                    simpleDateFormat.format(nguoiDung.getNgaySinh()),
                     nguoiDung.getGioiTinh() ? "Nam" : "Nữ",
                     nguoiDung.getSdt(),
                     nguoiDung.getEmail(),
                     nguoiDung.getChucVu().getTen()
             });
         }
+    }
+
+    public void clear(){
+        lbAnh.setIcon(null);
+        txtMa.setText("");
+        txtTen.setText("");
+        txtNgaySinh.setText("");
+        txtSDT.setText("");
+        txtEmail.setText("");
+        cbxCV.setSelectedIndex(0);
     }
 
     public void loadCBX_CV(List<ChucVu> list) {
@@ -438,7 +449,6 @@ public class NhanVienUI extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        System.out.println(txtNgaySinh.getText());
         int row = tblND.getSelectedRow();
         NguoiDung nguoiDung = nguoiDungService.getList().get(row);
         nguoiDung.setMa(txtMa.getText());
@@ -485,6 +495,7 @@ public class NhanVienUI extends javax.swing.JPanel {
 
     private void tblNDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNDMouseClicked
         // TODO add your handling code here:
+        clear();
         int row = tblND.getSelectedRow();
         NguoiDung nguoiDung = nguoiDungService.getList().get(row);
         txtMa.setText(tblND.getValueAt(row, 1).toString());

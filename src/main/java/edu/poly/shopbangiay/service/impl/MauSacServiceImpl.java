@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.MauSac;
-import edu.poly.shopbangiay.raven.repository.MauSacRepository;
+import edu.poly.shopbangiay.repository.MauSacRepository;
 import edu.poly.shopbangiay.service.MauSacService;
 
 import java.util.List;

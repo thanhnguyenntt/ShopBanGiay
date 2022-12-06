@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.HoaDon;
-import edu.poly.shopbangiay.raven.repository.HoaDonRepository;
+import edu.poly.shopbangiay.repository.HoaDonRepository;
 import edu.poly.shopbangiay.service.HoaDonService;
 
 import java.sql.Date;
