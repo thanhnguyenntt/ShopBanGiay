@@ -38,8 +38,8 @@ public class VoucherUI extends javax.swing.JPanel {
         loadData(vcService.getList());
         groupTT();
             
-        dateChooser.setDateFormat(new SimpleDateFormat("dd-mm-yyyy"));
-        dateChooser1.setDateFormat(new SimpleDateFormat("dd-mm-yyyy"));
+        dateChooser.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
+        dateChooser1.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         dateChooser.setTextField(txtTuNgay);
         dateChooser1.setTextField(txtDenNgay);
     }
