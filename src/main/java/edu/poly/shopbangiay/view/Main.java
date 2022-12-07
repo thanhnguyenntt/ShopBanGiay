@@ -204,7 +204,7 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory 
         }
         HoaDon hoaDon = locHD().get(row);
         if (hoaDon.getTinhTrang() == 1) {
-            JOptionPane.showMessageDialog(this, "Hóa đơn đã thanh toám");
+            JOptionPane.showMessageDialog(this, "Hóa đơn đã thanh toán");
             return false;
         }
         return true;
@@ -1411,13 +1411,13 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory 
         int row = tblHD.getSelectedRow();
         HoaDon hoaDon = locHD().get(row);
         txtMaHD.setText(hoaDon.getMa());
-        if (hoaDon.getTinhTrang() == 0) {
-            cbxKH.setSelectedIndex(0);
-            cbxVC.setSelectedIndex(0);
-        } else {
-            cbxKH.setSelectedItem(hoaDon.getKhachHang().getTen());
-            cbxVC.setSelectedItem(hoaDon.getVoucher().getTen());
-        }
+//        if (hoaDon.getTinhTrang() == 0) {
+//            cbxKH.setSelectedIndex(0);
+//            cbxVC.setSelectedIndex(0);
+//        } else {
+//            cbxKH.setSelectedItem(hoaDon.getKhachHang().getTen());
+//            cbxVC.setSelectedItem(hoaDon.getVoucher().getTen());
+//        }
 
         loadGH(cthdService.getCTHDByMaHD(txtMaHD.getText()));
 
@@ -1462,9 +1462,12 @@ public class Main extends javax.swing.JFrame implements Runnable, ThreadFactory 
 
     private void txtKhachTTCaretUpdate(javax.swing.event.CaretEvent evt) throws ParseException {//GEN-FIRST:event_txtKhachTTCaretUpdate
         // TODO add your handling code here:
-        if (!txtKhachTT.getText().equals("")) {
-            txtTienThua.setText(formatter.format((Integer.parseInt(txtKhachTT.getText())) - thanhTien()) + " VNĐ");
+        if(checkTT()) {
+            if (!txtKhachTT.getText().equals("")) {
+                txtTienThua.setText(formatter.format((Integer.parseInt(txtKhachTT.getText())) - thanhTien()) + " VNĐ");
+            }
         }
+
     }//GEN-LAST:event_txtKhachTTCaretUpdate
     public Integer khachTT(){
         return Integer.parseInt(txtKhachTT.getText());

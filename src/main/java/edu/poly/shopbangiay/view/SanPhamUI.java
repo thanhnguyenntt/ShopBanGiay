@@ -614,6 +614,7 @@ public class SanPhamUI extends javax.swing.JPanel {
     private void btnNhapFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileActionPerformed
         // TODO add your handling code here:
         List<ChiTietSanPham> list = new ArrayList<>();
+        List<SanPham> listSP = new ArrayList<>();
         JFileChooser chonFile = new JFileChooser("/");
         chonFile.showOpenDialog(null);
         File file = chonFile.getSelectedFile();
@@ -630,59 +631,74 @@ public class SanPhamUI extends javax.swing.JPanel {
                 }
                 String maSP = currentRow.getCell(0).getStringCellValue();
                 String tenSP = currentRow.getCell(1).getStringCellValue();
-                String tenLoai = currentRow.getCell(2).getStringCellValue();
-                String tenNSX = currentRow.getCell(3).getStringCellValue();
-                String soSize = currentRow.getCell(4).getStringCellValue();
-                String tenMau = currentRow.getCell(5).getStringCellValue();
-                String tenCL = currentRow.getCell(6).getStringCellValue();
-                String soLuong = currentRow.getCell(7).getStringCellValue();
-                String giaNhap = currentRow.getCell(8).getStringCellValue();
-                String giaBan = currentRow.getCell(9).getStringCellValue();
+                String idLoai = currentRow.getCell(2).getStringCellValue();
+                Double idNSX = currentRow.getCell(3).getNumericCellValue();
+                Double idSize = currentRow.getCell(4).getNumericCellValue();
+                Double idMau = currentRow.getCell(5).getNumericCellValue();
+                Double idCL = currentRow.getCell(6).getNumericCellValue();
+                Double soLuong = currentRow.getCell(7).getNumericCellValue();
+                Double giaNhap = currentRow.getCell(8).getNumericCellValue();
+                Double giaBan = currentRow.getCell(9).getNumericCellValue();
                 String moTa = currentRow.getCell(10).getStringCellValue();
                 String hinhAnh = currentRow.getCell(11).getStringCellValue();
-                String trangThai = currentRow.getCell(12).getStringCellValue();
+                Boolean trangThai = currentRow.getCell(12).getBooleanCellValue();
 
                 SanPham sanPham = new SanPham();
                 sanPham.setMa(maSP);
                 sanPham.setTen(tenSP);
 
+                listSP.add(sanPham);
                 ChiTietSanPham ctsp = new ChiTietSanPham();
                 ctsp.setSanPham(sanPham);
 
                 Loai loai = new Loai();
-                loai.setTen(tenLoai);
+                loai.setId(Integer.parseInt(idLoai));
                 ctsp.setLoai(loai);
 
                 Size size = new Size();
-                size.setSoSize(Integer.parseInt(soSize));
+                size.setId(Integer.parseInt(String.valueOf(idSize)));
                 ctsp.setSize(size);
 
                 ChatLieu chatLieu = new ChatLieu();
-                chatLieu.setTen(tenCL);
+                chatLieu.setId(Integer.parseInt(String.valueOf(idCL)));
                 ctsp.setChatLieu(chatLieu);
 
                 MauSac mauSac = new MauSac();
-                mauSac.setTen(tenMau);
+                mauSac.setId(Integer.parseInt(String.valueOf(idMau)));
                 ctsp.setMauSac(mauSac);
 
                 NSX nsx = new NSX();
-
-                nsx.setTen(tenNSX);
+                nsx.setId(Integer.parseInt(String.valueOf(idNSX)));
                 ctsp.setNsx(nsx);
 
-                ctsp.setSoLuong(Integer.parseInt(soLuong));
-                ctsp.setGiaNhap(Float.parseFloat(giaNhap));
-                ctsp.setGiaBan(Float.parseFloat(giaBan));
+                ctsp.setSoLuong(Integer.parseInt(String.valueOf(soLuong)));
+                ctsp.setGiaNhap(Float.parseFloat(String.valueOf(giaNhap)));
+                ctsp.setGiaBan(Float.parseFloat(String.valueOf(giaBan)));
                 ctsp.setMoTa(moTa);
                 ctsp.setHinhAnh(hinhAnh);
-                ctsp.setTinhTrang(Boolean.parseBoolean(trangThai));
+                ctsp.setTinhTrang(Boolean.parseBoolean(String.valueOf(trangThai)));
+                list.add(ctsp);
 
-                sanPhamService.them(sanPham);
-                ctspService.them(ctsp);
-                loadData(ctspService.getList());
             }
+            for (SanPham sp : listSP) {
+//                if (sp.getMa() != null){
+//                    sanPhamService.sua(sp);
+//                }else {
+//                    sanPhamService.them(sp);
+//                }
+            }
+            for (ChiTietSanPham ctsp : list) {
+//                if (ctsp.getId() != null){
+//                    ctspService.sua(ctsp);
+//                }else {
+//                    ctspService.them(ctsp);
+//                }
+                System.out.println(ctsp);
+            }
+            loadData(ctspService.timKiem(txtTim.getText()));
+            JOptionPane.showMessageDialog(this, "Nhập file thành công");
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnNhapFileActionPerformed
 

@@ -21,7 +21,7 @@ public class VCRepository {
 
     public List<Voucher> getList(Date date) {
         try {
-            Query query = session.createQuery("from Voucher where ngayBD <: date and ngayKT >: date order by ngayTao desc");
+            Query query = session.createQuery("from Voucher where ngayBD <: date and ngayKT >: date order by ngayTao asc ");
             query.setParameter("date", date);
             return query.getResultList();
         } catch (Exception e) {
