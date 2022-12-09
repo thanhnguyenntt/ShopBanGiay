@@ -112,4 +112,6 @@ GO
 
 ALTER DATABASE [shopBanGiay] SET  READ_WRITE 
 GO
+select * from Nhanvien
+
 
