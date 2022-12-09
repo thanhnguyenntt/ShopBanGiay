@@ -27,6 +27,7 @@ public class ChucVuUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadData(chucVuService.getList());
+     //   JOptionPane.showMessageDialog(this,"Nothing");
     }
 
     public void loadData(List<ChucVu> list){
