@@ -53,6 +53,6 @@ public class KhachHang implements Serializable {
 
     @Override
     public String toString() {
-        return ten + '-' + sdt;
+        return sdt + '-' + ten;
     }
 }

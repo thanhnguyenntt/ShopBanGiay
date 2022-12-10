@@ -28,6 +28,7 @@ import table.TableCustom;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
     private KhachHangService khachHangService = new KhachHangServiceImpl();
     private NguoiDungService nguoiDungService = new NguoiDungServiceImpl();
     private VCService vcService = new VCServiceImpl();
-
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     public BanHangUI() {
         initComponents();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
@@ -70,7 +71,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         loadSP(ctspService.timKiem(txtTimSP.getText()));
         loadHD(hoaDonService.getList());
         loadCBXKH(khachHangService.getList());
-        loadCBXVC(vcService.getList());
+        loadCBXVC(vcService.getList(Date.valueOf(LocalDate.now())));
         loadCBX_TT();
 //        initWebcam(Cam);
     }
@@ -791,11 +792,11 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         NguoiDung nguoiDung = new NguoiDung();
         nguoiDung.setId(2);
         hoaDon.setNguoiDung(nguoiDung);
-        hoaDon.setNgayTao(Date.valueOf(LocalDate.now()));
+        hoaDon.setNgayTao(Date.valueOf(simpleDateFormat.format(new java.util.Date())));
         hoaDon.setTinhTrang(0);
         KhachHang khachHang = khachHangService.getList().get(0);
         hoaDon.setKhachHang(khachHang);
-        Voucher voucher = vcService.getList().get(0);
+        Voucher voucher = vcService.getList(Date.valueOf(LocalDate.now())).get(0);
         hoaDon.setVoucher(voucher);
 
         hoaDonService.them(hoaDon);
@@ -824,7 +825,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                 hoaDon.setKhachHang(khachHang);
                 hoaDon.setTinhTrang(1);
                 hoaDon.setNgayTT(Date.valueOf(LocalDate.now()));
-                Voucher voucher = vcService.getList().get(cbxVC.getSelectedIndex());
+                Voucher voucher = vcService.getList(Date.valueOf(LocalDate.now())).get(cbxVC.getSelectedIndex());
                 hoaDon.setVoucher(voucher);
 
                 hoaDonService.sua(hoaDon);
@@ -859,7 +860,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 
     private void cbxVCItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxVCItemStateChanged
         // TODO add your handling code here:
-        Voucher voucher = vcService.getList().get(cbxVC.getSelectedIndex());
+        Voucher voucher = vcService.getList(Date.valueOf(LocalDate.now())).get(cbxVC.getSelectedIndex());
         txtGiamGia.setText(voucher.getPhanTramGiam().toString());
 
         txtThanhTien.setText(String.valueOf(Float.parseFloat(txtTongTien.getText()) - (Float.parseFloat(txtTongTien.getText()) / 100 * Integer.parseInt(txtGiamGia.getText()))));

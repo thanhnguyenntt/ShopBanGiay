@@ -2,7 +2,7 @@ package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.ChucVu;
 import edu.poly.shopbangiay.model.NguoiDung;
-import edu.poly.shopbangiay.raven.repository.NguoiDungRepository;
+import edu.poly.shopbangiay.repository.NguoiDungRepository;
 import edu.poly.shopbangiay.service.NguoiDungService;
 
 import java.util.List;

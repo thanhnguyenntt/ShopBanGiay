@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.SanPham;
-import edu.poly.shopbangiay.raven.repository.SanPhamRepository;
+import edu.poly.shopbangiay.repository.SanPhamRepository;
 import edu.poly.shopbangiay.service.SanPhamService;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package edu.poly.shopbangiay.service.impl;
 
 import edu.poly.shopbangiay.model.ChiTietHoaDon;
-import edu.poly.shopbangiay.raven.repository.CTHDRepository;
+import edu.poly.shopbangiay.repository.CTHDRepository;
 import edu.poly.shopbangiay.service.CTHDService;
 
 import java.util.List;
