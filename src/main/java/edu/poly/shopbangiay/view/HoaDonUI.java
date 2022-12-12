@@ -70,6 +70,27 @@ public class HoaDonUI extends javax.swing.JPanel {
             });
         }
     }
+     //in hoa don
+    static Cell getHeaderTextCell(String textValue) {
+
+        return new Cell().add(textValue).setBold().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+    }
+
+    static Cell getHeaderTextCellValue(String textValue) {
+
+        return new Cell().add(textValue).setBold().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+    }
+
+    static Cell getBillingandShippingCell(String textValue) {
+
+        return new Cell().add(textValue).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+    }
+
+    static Cell getCell0fLeft(String textValue, Boolean isBold) {
+        Cell myCell = new Cell().add(textValue).setFontSize(10f).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+        
+        return isBold ? myCell.setBold() : myCell;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
