@@ -11,6 +11,23 @@ import edu.poly.shopbangiay.service.HoaDonService;
 import edu.poly.shopbangiay.service.impl.CTHDServiceImpl;
 import edu.poly.shopbangiay.service.impl.HoaDonServiceImpl;
 import table.TableCustom;
+// import in hoadon
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import java.io.FileNotFoundException;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.DashedBorder;
+import com.itextpdf.layout.border.SolidBorder;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
