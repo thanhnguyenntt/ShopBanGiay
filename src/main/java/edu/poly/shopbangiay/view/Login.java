@@ -317,39 +317,6 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginMouseClicked
 
-//    
-//    public boolean check(){
-//        if(txtUser.getText().isEmpty()){
-//            lbErrorUser.setText("Vui lòng nhập tài khoản !");
-//            return false;
-//        }else{
-//            lbErrorUser.setText("");
-//        }
-//        if(txtPass.getPassword().length == 0){
-//            lbErrorPass.setText("Vui lòng nhập mật khẩu !");
-//            return false;
-//        }else{
-//            lbErrorPass.setText("");
-//        }
-//
-//        return true;
-//    }
-//
-//    public NguoiDung getND(){
-//        List<NguoiDung> listNguoiDung = nguoiDungService.getList();
-//        for (NguoiDung nd : listNguoiDung) {
-//            if(txtUser.getText().equals(nd.getSdt()) && txtPass.getText().equals(nd.getMatKhau())){
-//                lbErrorPass.setText("");
-//                Main main = new Main();
-//                main.setVisible(true);
-//                 nguoiDung = nd;
-//                dispose();
-//            }else{
-//                lbErrorPass.setText("Vui lòng kiểm tra lại tài khoản hoặc mật khẩu");
-//            }
-//        }
-//        return null;
-//    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
