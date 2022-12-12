@@ -114,4 +114,5 @@ ALTER DATABASE [shopBanGiay] SET  READ_WRITE
 GO
 select * from Nhanvien
 
-
+select * from ChiTietSanPham
+select * from Loai
