@@ -44,6 +44,8 @@ public class HoaDonUI extends javax.swing.JPanel {
     private HoaDonService hoaDonService = new HoaDonServiceImpl();
     private CTHDService cthdService = new CTHDServiceImpl();
     private DefaultTableModel defaultTableModel;
+    List<ChiTietHoaDon> lisCT = new ArrayList<>();
+    List<HoaDon> lisHD = new ArrayList<>();
     public HoaDonUI() {
         initComponents();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
@@ -68,6 +70,7 @@ public class HoaDonUI extends javax.swing.JPanel {
                     hd.getTinhTrang() == 0 ? "Chưa thanh toán" : "Đã thanh toán",
                     hd.getNgayTT()
             });
+             lisHD.add(hd);
         }
     }
 
@@ -85,6 +88,7 @@ public class HoaDonUI extends javax.swing.JPanel {
                     cthd.getSoLuong() * cthd.getChiTietSanPham().getGiaBan()
 
             });
+            lisCT.add(cthd);
         }
     }
      //in hoa don
